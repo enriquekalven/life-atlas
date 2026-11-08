@@ -22,8 +22,32 @@ export const GEOLOGICAL_ERAS: GeologicalEraInfo[] = [
     oxygenPercent: '12.5%',
     continentalLayout: 'Gondwana & Laurentia (No land plants or land animals yet)',
     kidDescription:
-      'Life explodes in the oceans! The very first compound eyes, shells, claws, and swimming apex predators appear in warm seas.',
+      'Life explodes in the oceans! The very first compound eyes, trilobite armor, claws, and swimming apex predators appear in warm seas.',
     accentHex: '#06b6d4',
+  },
+  {
+    id: 'ordovician',
+    name: 'Ordovician Marine Radiation',
+    periodSpan: '485 – 444 MYA',
+    myaNumeric: 465,
+    globalTempAvgC: '19°C (High Tropical Seas → Late Glaciation)',
+    oxygenPercent: '13.5%',
+    continentalLayout: 'Southern Gondwana & Warm Laurentian Reefs',
+    kidDescription:
+      'Marine biodiversity triples! Six-meter cone-shelled Cameroceras nautiloids, brachiopods, crinoids, and jawless armored fishes rule ancient coral seas.',
+    accentHex: '#0891b2',
+  },
+  {
+    id: 'silurian',
+    name: 'Silurian Reefs & Sea Scorpions',
+    periodSpan: '444 – 419 MYA',
+    myaNumeric: 428,
+    globalTempAvgC: '18°C (Melting Glaciers & Coral Atolls)',
+    oxygenPercent: '14.5%',
+    continentalLayout: 'Euramerica Collides as First Vascular Land Plants Sprout',
+    kidDescription:
+      'Armored Eurypterus sea scorpions prowl shallow lagoons while the first jawed fishes evolve in the water and tiny millipedes step onto mossy shorelines!',
+    accentHex: '#14b8a6',
   },
   {
     id: 'devonian',

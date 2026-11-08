@@ -468,14 +468,17 @@ export function computeSpeciesEyeGazeDirection(archetype: string, animalId: stri
     // Forward-facing stereoscopic predator eyes (+X dominant, ~32 deg lateral)
     return new THREE.Vector3(0.84, 0.04, side * 0.54).normalize();
   }
-  if (archetype === 'crocodilian' || archetype === 'amphibian') {
-    // Dorsolateral periscopic eyes (+X forward, +Y upward, ±Z lateral)
+  if (archetype === 'crocodilian' || archetype === 'amphibian' || archetype === 'trilobite_arthropod') {
+    // Dorsolateral periscopic / crescentic eyes (+X forward, +Y upward, ±Z lateral)
     return new THREE.Vector3(0.56, 0.28, side * 0.78).normalize();
+  }
+  if (archetype === 'serpentine_reptile') {
+    return new THREE.Vector3(0.68, 0.16, side * 0.71).normalize();
   }
   if (archetype === 'avian_raptor') {
     // Binocular-capable raptor eyes
     return new THREE.Vector3(0.74, 0.05, side * 0.67).normalize();
   }
-  // Panoramic / lateral marine, proboscidean, cephalopod & arthropod eyes
+  // Panoramic / lateral marine, manta_ray, proboscidean, cephalopod, cnidarian & arthropod eyes
   return new THREE.Vector3(0.46, 0.06, side * 0.88).normalize();
 }

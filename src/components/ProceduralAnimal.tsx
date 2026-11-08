@@ -141,6 +141,8 @@ export const HyperRealEyeRig: React.FC<HyperRealEyeRigProps> = ({
   );
 
   const isCompound =
+    ocularProfile.pupilType === 'compound' ||
+    ocularProfile.pupilType === 'trinocular-compound' ||
     ocularProfile.eyeType === 'compound-hex' ||
     ocularProfile.eyeType === 'compound-trinocular';
 
@@ -580,7 +582,21 @@ export const ProceduralAnimal: React.FC<ProceduralAnimalProps> = ({
   const boneGroupRef = useRef<THREE.Group>(null);
   const organGroupRef = useRef<THREE.Group>(null);
 
-  useEffect(() => {
+  const ringMaterials = useMemo(
+    () =>
+      (plan.rings ?? []).map(
+        (r) => new THREE.MeshPhysicalMaterial({ color: r.color, roughness: 0.42, clearcoat: 0.45 })
+      ),
+    [plan.rings]
+  );
+  useEffect(
+    () => () => {
+      ringMaterials.forEach((rm) => rm.dispose());
+    },
+    [ringMaterials]
+  );
+
+  useLayoutEffect(() => {
     const st = LAYER_STYLE[activeLayer];
     const apply = (m: THREE.Material, opacity: number, base = 1) => {
       const o = opacity * base;
@@ -593,6 +609,7 @@ export const ProceduralAnimal: React.FC<ProceduralAnimalProps> = ({
       [mats.skin, 1], [mats.finSkin, 1], [mats.finTextured, 1], [mats.finSecondary, 1], [mats.finAccent, 1], [mats.finDark, 1], [mats.finIvory, 1],
       [mats.membrane, 0.92], [mats.keratin, 1], [mats.chitin, 1], [mats.dark, 1], [mats.tongue, 1], [mats.gill, 1], [mats.nose, 1],
       [mats.compound, 1],
+      ...ringMaterials.map((rm): [THREE.Material, number] => [rm, 1]),
     ];
     skinLike.forEach(([m, base]) => apply(m, st.skin, base));
     apply(mats.ivory, Math.max(st.skin, st.bone));
@@ -606,7 +623,7 @@ export const ProceduralAnimal: React.FC<ProceduralAnimalProps> = ({
     if (muscleGroupRef.current) muscleGroupRef.current.visible = st.muscle > 0;
     if (boneGroupRef.current) boneGroupRef.current.visible = st.bone > 0;
     if (organGroupRef.current) organGroupRef.current.visible = st.organ > 0;
-  }, [activeLayer, mats]);
+  }, [activeLayer, mats, ringMaterials]);
 
   const ghosted = activeLayer !== 'exterior';
 
@@ -890,11 +907,11 @@ export const ProceduralAnimal: React.FC<ProceduralAnimalProps> = ({
           <Instanced geometry={UNIT.cone} material={mats.finSkin} matrices={model.scutes} renderOrder={skinOrder} />
           <Instanced geometry={UNIT.box} material={mats.dark} matrices={model.gillSlits} renderOrder={skinOrder} />
           {plan.rings?.map((r, i) => (
-            <mesh key={`ring-${i}`} geometry={UNIT.ring} material={new THREE.MeshPhysicalMaterial({ color: r.color, roughness: 0.5 })} position={r.position} rotation={r.rotation ?? [0, 0, 0]} scale={[r.radius, r.radius, r.tube * 4]} renderOrder={skinOrder} />
+            <mesh key={`ring-${i}`} geometry={UNIT.ring} material={ringMaterials[i] ?? mats.keratin} position={r.position} rotation={r.rotation ?? [0, 0, 0]} scale={[r.radius, r.radius, r.tube * 4]} renderOrder={skinOrder} />
           ))}
 
           {/* fur shells */}
-          <group ref={furGroupRef}>
+          <group ref={furGroupRef} visible={LAYER_STYLE[activeLayer].fur}>
             {mats.fur && furShells.map((shell, i) => (
               <mesh key={`fur-${i}`} geometry={shell.geometry} material={mats.fur!} renderOrder={1 + i} />
             ))}
@@ -904,7 +921,7 @@ export const ProceduralAnimal: React.FC<ProceduralAnimalProps> = ({
 
       {/* ============================ MUSCULAR ============================ */}
       {!skipMuscleAndBone && (
-        <group ref={muscleGroupRef}>
+        <group ref={muscleGroupRef} visible={LAYER_STYLE[activeLayer].muscle > 0}>
           <mesh geometry={model.muscle.geometry} material={mats.muscle} />
           {mirrored(model.limbs, (l) => l.spec.mirror !== false, (limb, i, sign) => (
             <group key={`mlimb-${i}-${sign}`} scale={[1, 1, sign]}>
@@ -925,7 +942,7 @@ export const ProceduralAnimal: React.FC<ProceduralAnimalProps> = ({
 
       {/* ============================ SKELETAL ============================ */}
       {!skipMuscleAndBone && (
-        <group ref={boneGroupRef}>
+        <group ref={boneGroupRef} visible={LAYER_STYLE[activeLayer].bone > 0}>
           {(plan.skeleton.type === 'endo' || plan.skeleton.type === 'cartilage') && (
             <>
               <Instanced geometry={UNIT.cylinder} material={boneMat} matrices={model.skeleton.vertebrae} />
@@ -983,7 +1000,7 @@ export const ProceduralAnimal: React.FC<ProceduralAnimalProps> = ({
 
       {/* ============================= ORGANS ============================= */}
       {!skipOrgans && (
-        <group ref={organGroupRef}>
+        <group ref={organGroupRef} visible={LAYER_STYLE[activeLayer].organ > 0}>
           {model.organs.map((org, i) => {
             const material = mats.organs[org.kind];
             if (org.shape === 'tube' && org.tubeGeometry) {

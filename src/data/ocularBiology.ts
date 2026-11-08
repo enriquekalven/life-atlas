@@ -576,6 +576,204 @@ export const OCULAR_BIOLOGY_BY_SPECIES: Record<string, OcularBiologyProfile> = {
       'Because Basilosaurus lived 38 million years ago before whales evolved high-frequency sonar ("echolocation"), it relied on huge, sharp eyes tucked under a bony sun-visor brow ridge to hunt sharks in clear tropical lagoons!',
     museumReference: 'Smithsonian NMNH Sant Ocean Hall 36-Foot Basilosaurus cetoides Skeleton (USNM 4675)',
   },
+  narwhal: {
+    eyeType: 'Bathypelagic Sub-Ice Monodontid Cetacean Camera Eye',
+    pupilType: 'hslit',
+    pupilShapeLabel: 'Crescentic Operculated Pupil Adapting From Pack-Ice Glare to 1,500 m Pitch Darkness',
+    eyeballDiameterMm: '54 mm (Thick Insulating Scleral Capsule Warmed by Vascular Rete Mirabile)',
+    photoreceptors: 'Monochromatic Deep-Diving Rod Retina Tuned to 484 nm Biotic Twilight + Tapetum Fibrosum',
+    fieldOfView: '280° Lateral Ice-Lead & Greenland-Halibut Scan',
+    corneaAndLens: 'Flattened Arctic Marine Cornea + High-Power Spherical Lens Paired with High-Precision Biosonar',
+    hasScleralOssicles: false,
+    tapetumColor: '#38bdf8',
+    irisPrimaryHex: '#1e293b',
+    irisSecondaryHex: '#7dd3fc',
+    scleraHex: '#cbd5e1',
+    kidVisionSecret:
+      'Narwhals dive nearly a mile deep beneath solid Arctic sea ice where zero sunlight reaches—combining cold-shielded twilight eyes with the most directional sonar beam of any whale on Earth!',
+    museumReference: 'Smithsonian NMNH Arctic Studies Center & Sant Ocean Hall Monodon Collection',
+  },
+  platypus: {
+    eyeType: 'Ancestral Monotreme Double-Cone Camera Eye (Closed Underwater!)',
+    pupilType: 'round',
+    pupilShapeLabel: 'Small Circular Pupil Sealed Behind Muscular Furrowed Skin Folds While Diving',
+    eyeballDiameterMm: '6 mm (Compact Dorsal-Set Eye Retaining Ancient Reptilian Double Cones & Oil Droplets!)',
+    photoreceptors: 'SWS & LWS Cones with Reptile-Style Colored Oil Droplets + Dense Rods',
+    fieldOfView: '270° River-Surface Scan Above Water',
+    corneaAndLens: 'Steep Corneal Curvature for Air Vision; Underwater, Platypuses Shut Their Eyes & Hunt With 40,000 Bill Electroreceptors!',
+    hasScleralOssicles: false,
+    irisPrimaryHex: '#451a03',
+    irisSecondaryHex: '#b45309',
+    scleraHex: '#d6d3d1',
+    kidVisionSecret:
+      'A Platypus swims completely blindfolded! The instant it dives, skin grooves snap shut over its eyes and ears—and its rubbery duck bill switches on "sixth-sense" electric radar to detect a shrimp’s tiny heartbeat!',
+    museumReference: 'Smithsonian NMNH Hall of Mammals Monotreme Collection • Zeiss et al. (2011)',
+  },
+  'giant-oceanic-manta-ray': {
+    eyeType: 'Cephalic-Flanked Pelagic Mobulid Elasmobranch Camera Eye',
+    pupilType: 'round',
+    pupilShapeLabel: 'Mobile Circular Pupil with Active Pupillary Light Reflex & Cranial Rete Heater',
+    eyeballDiameterMm: '64 mm (Mounted Laterally at the Base of the Unfurling Cephalic Horn Fins)',
+    photoreceptors: 'Duplex Cone & Rod Retina Capable of Self-Recognition in Mirror Tests!',
+    fieldOfView: '320° Panoramic Wrap-Around Pelagic & Cleaner-Station Vision',
+    corneaAndLens: 'Streamlined Iso-Refractive Cornea Warmed by Counter-Current Brain Blood Vessels',
+    hasScleralOssicles: false,
+    tapetumColor: '#38bdf8',
+    irisPrimaryHex: '#1e293b',
+    irisSecondaryHex: '#94a3b8',
+    scleraHex: '#cbd5e1',
+    kidVisionSecret:
+      'Unlike most fish, Giant Manta Rays use their wide-angle eyes to inspect themselves in underwater mirrors—making them one of the only ocean fish to show signs of visual self-awareness!',
+    museumReference: 'Smithsonian Tropical Research Institute • Ari & D’Agostino (2016) Journal of Ethology',
+  },
+  'lions-mane-jellyfish': {
+    eyeType: '8 Marginal Rhopalia Sensory Clubs with Pigment-Cup Ocelli (No Brain!)',
+    pupilType: 'round',
+    pupilShapeLabel: 'Microscopic Pigment-Spot & Pit Ocelli Spaced Around the 8-Lobed Bell Rim',
+    eyeballDiameterMm: '0.4 mm Rhopalial Sensory Niches (Paired with Crystal Statocyst Gravity Sensors)',
+    photoreceptors: 'Ciliary Opsins Detecting Sunlit Surface Shimmer vs. Deep Ocean Shadow Gradients',
+    fieldOfView: '360° Radial Bell-Margin Light & Gravity Ring',
+    corneaAndLens: 'Simple Epidermal Pigment Cups Wire Directly Into the Swimming Nerve Net—No Central Brain Needed!',
+    hasScleralOssicles: false,
+    tapetumColor: '#fb923c',
+    irisPrimaryHex: '#c2410c',
+    irisSecondaryHex: '#fdba74',
+    scleraHex: '#fed7aa',
+    kidVisionSecret:
+      'Even without a brain or true eyeballs, a Lion’s Mane Jellyfish has EIGHT tiny light-and-gravity sensor pods ("rhopalia") around its bell rim so it always knows which way is up toward sunlit plankton!',
+    museumReference: 'Smithsonian NMNH Sant Ocean Hall Medusozoa Collection',
+  },
+  dodo: {
+    eyeType: 'Diurnal Frugivorous Giant Columbid Avian Camera Eye',
+    pupilType: 'round',
+    pupilShapeLabel: 'Circular Forest-Canopy Pupil Supported by a Bony Scleral Ossicle Ring',
+    eyeballDiameterMm: '22 mm (Positioned High Behind the Massive 23-cm Keratinous Hooked Bill)',
+    photoreceptors: 'Tetrachromatic Pigeon-Lineage Cones (UV + Red/Green/Blue) Tuned for Fallen Ripened Fruit',
+    fieldOfView: '300° Panoramic Forest-Floor & Canopy Scan',
+    corneaAndLens: '15 Bony Scleral Ossicles + Rapid Accommodation Inherited From Flying Nicobar-Pigeon Ancestors',
+    hasScleralOssicles: true,
+    irisPrimaryHex: '#ca8a04',
+    irisSecondaryHex: '#fef08a',
+    scleraHex: '#e7e5e4',
+    kidVisionSecret:
+      'Because Dodos were actually giant flightless pigeons, they inherited super-rich 4-color ultraviolet bird vision—perfect for spotting ripe fallen tambalacoque fruits in dark Mauritius forests!',
+    museumReference: 'Oxford University Museum of Natural History (Tradescant Dodo Head) & Smithsonian NMNH',
+  },
+  thylacine: {
+    eyeType: 'Crepuscular Apex Marsupial Camera Eye',
+    pupilType: 'round',
+    pupilShapeLabel: 'Wide-Aperture Circular Dusk-Hunting Pupil with BrightMarsupial Tapetum',
+    eyeballDiameterMm: '25 mm (Set in a Wolf-Convergent Marsupial Skull with Wide-Gape Jaws)',
+    photoreceptors: 'Trichromatic Marsupial Cone Potential + High-Density Night-Hunting Rods',
+    fieldOfView: '215° Eucalyptus-Woodland Scan with ~95° Forward Binocular Overlap',
+    corneaAndLens: 'Large Nocturnal Cornea & Anterior Chamber Adapted for Dusk Wallaby Stalking',
+    hasScleralOssicles: false,
+    tapetumColor: '#fde047',
+    irisPrimaryHex: '#451a03',
+    irisSecondaryHex: '#a16207',
+    scleraHex: '#d6d3d1',
+    kidVisionSecret:
+      'Even though the Tasmanian Tiger was a pouched marsupial closer to kangaroos than wolves, evolution sculpted its skull and forward-aimed night eyes to match a wolf’s hunting gaze almost millimeter for millimeter!',
+    museumReference: 'Smithsonian NMNH National Zoo Historical Thylacinus cynocephalus Specimens',
+  },
+  'stellers-sea-cow': {
+    eyeType: 'Sub-Arctic Kelp-Forest Giant Sirenian Camera Eye',
+    pupilType: 'round',
+    pupilShapeLabel: 'Small Circular Pupil Protected by Thick Oil-Secreting Nictitating Membrane',
+    eyeballDiameterMm: '28 mm (Surprisingly Tiny Walnut-Sized Eye on a 9-Meter, 10-Ton Marine Giant!)',
+    photoreceptors: 'Dichromatic Blue/Green Cone + Rod Retina Supplemented by Bristly Tactile Lip Whiskers',
+    fieldOfView: '260° Shallow Bering-Island Kelp Canopy Scan',
+    corneaAndLens: 'Spherical Sirenian Lens Coated in Thick Mucoid Tears Against Freezing Surf',
+    hasScleralOssicles: false,
+    irisPrimaryHex: '#3f2e21',
+    irisSecondaryHex: '#78716c',
+    scleraHex: '#d6d3d1',
+    kidVisionSecret:
+      'Georg Wilhelm Steller wrote in 1741 that a 30-foot Steller’s Sea Cow had eyes no bigger than a sheep’s—relying on thousands of stiff whisker bristles on its upper lip to feel lush kelp blades in misty Bering waves!',
+    museumReference: 'Smithsonian NMNH Hydrodamalis gigas Skeleton (USNM 218326) • Steller (1751)',
+  },
+  'paradoxides-davidis': {
+    eyeType: 'Crystal-Calcite Holochroal Crescentic Compound Eye',
+    pupilType: 'compound',
+    pupilShapeLabel: 'Curved Visual Surface of 1,500+ Pure Inorganic Calcite Crystal Lenses!',
+    eyeballDiameterMm: '28 mm Crescentic Eye Ridges Flanking the Glabella (Protected by Palpebral Rims)',
+    photoreceptors: 'Tightly Packed Hexagonal Calcite Prisms Focused Along the Crystal C-Axis',
+    fieldOfView: '330° Wrap-Around Benthic Seafloor Horizon Scan (Zero Vertical Overhead View)',
+    corneaAndLens: 'Made of Solid Rock! Pure Transparent CaCO3 Calcite Crystals Eliminated Spherical Aberration',
+    hasScleralOssicles: false,
+    irisPrimaryHex: '#b45309',
+    irisSecondaryHex: '#fcd34d',
+    scleraHex: '#451a03',
+    kidVisionSecret:
+      'Trilobites like Paradoxides are the ONLY animals in history that built their eye lenses out of solid crystal rock—pure transparent calcite mineral—which is why their actual 505-million-year-old lenses survive intact as fossils!',
+    museumReference: 'Smithsonian NMNH Cambrian Trilobite Collection • Clarkson et al. (2006) Arthropod Structure & Development',
+  },
+  'cameroceras-trentonense': {
+    eyeType: 'Ordovician Giant Nautiloid Lateral Camera / Pinhole Eye',
+    pupilType: 'w-cephalopod',
+    pupilShapeLabel: 'Horizontally Slotted Cephalopod Aperture Flanked by Sensory Olfactory Rhinophores',
+    eyeballDiameterMm: '75 mm (Fleshy Stalked Lateral Eye Capsules Emerging Ahead of the 9-Meter Shell Aperture)',
+    photoreceptors: 'Rhabdomeric Microvillar Photoreceptors with Zero Optic-Nerve Blind Spot',
+    fieldOfView: '290° Ordovician Reef & Trilobite-Hunting Scan',
+    corneaAndLens: 'Early Paleozoic Transition Between Open Nautilus-Style Pinhole & Enclosed Coleoid Lens',
+    hasScleralOssicles: false,
+    irisPrimaryHex: '#b45309',
+    irisSecondaryHex: '#fde68a',
+    scleraHex: '#78350f',
+    kidVisionSecret:
+      'Before any fish even had jaws, 9-meter Cameroceras patrolled Ordovician reefs with huge cephalopod eyes peering out from the open end of a straight cone shell as long as a school bus!',
+    museumReference: 'Smithsonian NMNH Paleozoic Cephalopod Collection • Kröger et al. (2011)',
+  },
+  'eurypterus-remipes': {
+    eyeType: 'Dual Kidney-Shaped Compound Eyes + Central Median Ocelli',
+    pupilType: 'compound',
+    pupilShapeLabel: 'Reniform Lateral Compound Facet Arrays (~2,500 Lenses) + 2 Central Light-Sensing Ocelli',
+    eyeballDiameterMm: '18 mm Kidney-Shaped Dorsal Prosoma Domes',
+    photoreceptors: 'Chelicerate Arthropodan Rhabdomeres Adapted for Sunlit Silurian Lagoons',
+    fieldOfView: '310° Dorsal & Lateral Lagoon Ambush Envelope',
+    corneaAndLens: 'Smooth Cuticular Cornea Overlying Graded-Index Chitinous Cones (Like Modern Horseshoe Crabs!)',
+    hasScleralOssicles: false,
+    irisPrimaryHex: '#a16207',
+    irisSecondaryHex: '#fde047',
+    scleraHex: '#422006',
+    kidVisionSecret:
+      'Sea scorpions like Eurypterus actually had FOUR eyes on top of their head shield: two big kidney-shaped compound eyes to spot fish, plus two tiny simple eyes right in the center to track sunlight overhead!',
+    museumReference: 'New York State Museum / Smithsonian NMNH Bertie Waterlime Eurypterid Collection',
+  },
+  'tiktaalik-roseae': {
+    eyeType: 'Dorsal-Mounted Tetrapodomorph Waterline Periscope Eye',
+    pupilType: 'round',
+    pupilShapeLabel: 'Circular Air-and-Water Pupil Framed by Bony Scleral Ossicles on Top of a Flat Skull',
+    eyeballDiameterMm: '30 mm (Shifted to the Flat Top of the Skull as Eyes Doubled in Size Leaving the Water!)',
+    photoreceptors: 'Devonian Swamp Cone & Rod Retina Enabling Long-Range Vision Through Clear Air!',
+    fieldOfView: '290° Mudflat & Shallow-Stream Surface Panorama',
+    corneaAndLens: 'Transitional Cornea Beginning to Focus Light in Air as Fins Pushed the Head Above Devonian Shallows',
+    hasScleralOssicles: true,
+    tapetumColor: '#fbbf24',
+    irisPrimaryHex: '#d97706',
+    irisSecondaryHex: '#fde68a',
+    scleraHex: '#d6d3d1',
+    kidVisionSecret:
+      'As fish like Tiktaalik began peeking out of murky water into clear air 375 million years ago, their eyeballs migrated to the flat top of their heads—letting them see 50 times farther in air than underwater!',
+    museumReference: 'Field Museum / Daeschler, Shubin & Jenkins (2006) Nature • MacIver et al. (2017) PNAS',
+  },
+  'helicoprion-bessonovi': {
+    eyeType: 'Mesopelagic Euchondrocephalan Holocephali Tapetal Eye',
+    pupilType: 'round',
+    pupilShapeLabel: 'Large Circular Deep-Water Pupil with Brilliant Emerald-Blue Guanine Tapetum',
+    eyeballDiameterMm: '88 mm (Giant Chimaera-Lineage Eye Positioned Above the Buzzsaw Tooth-Whorl)',
+    photoreceptors: 'Rod-Rich Pelagic Retina Optimized for Spotting Permian Ammonoids & Squid in Twilight Seas',
+    fieldOfView: '300° Lateral Pelagic Cephalopod-Tracking Envelope',
+    corneaAndLens: 'Iso-Refractive Marine Cornea + High-Index Spherical Crystalline Lens',
+    hasScleralOssicles: false,
+    tapetumColor: '#34d399',
+    irisPrimaryHex: '#065f46',
+    irisSecondaryHex: '#6ee7b7',
+    scleraHex: '#94a3b8',
+    kidVisionSecret:
+      'CT scans revealed Helicoprion wasn’t a true shark at all, but a giant 8-meter cousin of modern deep-sea "ghost sharks" (chimaeras)—complete with huge glowing green-reflective eyes above its 360° buzzsaw lower jaw!',
+    museumReference: 'Idaho Museum of Natural History / Tapanila et al. (2013) Biology Letters',
+  },
 };
 
 export function getOcularBiology(
@@ -599,39 +797,46 @@ export function getOcularBiology(
   if (exact) return exact;
 
   // Fallback for live GBIF/PBDB dynamically discovered species
-  const isArthropod = archetype === 'arthropod';
+  const isArthropod = archetype === 'arthropod' || archetype === 'trilobite_arthropod';
   const isCephalopod = archetype === 'cephalopod';
+  const isCnidarian = archetype === 'cnidarian_medusa';
   const isRaptor = archetype === 'avian_raptor' || archetype === 'penguin';
-  const isCroc = archetype === 'crocodilian';
+  const isCrocOrSnake = archetype === 'crocodilian' || archetype === 'serpentine_reptile';
 
   return {
     eyeType: isArthropod
       ? 'compound-hex'
       : isCephalopod
       ? 'cephalopod-camera'
+      : isCnidarian
+      ? 'rhopalia-ocelli'
       : 'vertebrate-camera',
     pupilType: isArthropod
       ? 'compound'
       : isCephalopod
       ? 'w-cephalopod'
-      : isCroc
+      : isCrocOrSnake
       ? 'slit'
       : 'round',
     pupilShapeLabel: isArthropod
       ? 'Hexagonal Ommatidia Honeycomb Array with Pseudopupil'
       : isCephalopod
       ? 'W-Shaped Chromatic-Focus Slit Pupil'
-      : isCroc
+      : isCnidarian
+      ? 'Marginal Rhopalia Pigment-Cup Ocelli'
+      : isCrocOrSnake
       ? 'Vertical Ambush Slit Pupil'
       : 'Circular Autonomic Pupil with Iris Stroma Fibers',
-    eyeballDiameterMm: '24 – 45 mm (Species-Scaled Orbital Globe)',
+    eyeballDiameterMm: isCnidarian ? '0.5 mm Marginal Sensory Club' : '24 – 45 mm (Species-Scaled Orbital Globe)',
     photoreceptors: isArthropod
       ? 'Thousands of Rhabdomeric Ommatidia Units'
+      : isCnidarian
+      ? 'Ciliary Opsin Photoreceptor Pit Cells'
       : 'Rods (Low-Light Sensitivity) + Multi-Opsin Cones (Color Discrimination)',
-    fieldOfView: '240° – 320° Habitat Scan',
+    fieldOfView: isCnidarian ? '360° Radial Bell Margin' : '240° – 320° Habitat Scan',
     corneaAndLens: 'Refractive Tear-Film Cornea (IOR 1.376) + Focusing Crystalline Lens',
-    hasScleralOssicles: isRaptor || isCroc,
-    tapetumColor: isCroc ? '#f97316' : undefined,
+    hasScleralOssicles: isRaptor || archetype === 'crocodilian',
+    tapetumColor: isCrocOrSnake ? '#f97316' : undefined,
     irisPrimaryHex: eyeColorHex || '#d97706',
     irisSecondaryHex: '#fef08a',
     scleraHex: '#e7e5e4',

@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { CURATED_ANIMALS } from './data/animals';
+import {
+  ANIMAL_KINGDOM_PHYLA,
+  compendiumSpeciesToAnimalRecord,
+  GLOBAL_ANIMAL_BIODIVERSITY_STATS,
+  HOLOCENE_EXTINCT_SPECIES,
+} from './data/animalKingdomTree';
 import { GEOLOGICAL_ERAS } from './data/geologicalEras';
 import { getOcularBiology, OCULAR_BIOLOGY_BY_SPECIES } from './data/ocularBiology';
 import { isSupportedLang, SUPPORTED_LANGUAGES, UI_STRINGS } from './i18n';
@@ -7,20 +13,29 @@ import { sanitizePlainText, validateSearchQuery } from './services/encyclopediaA
 import { SPECIES_WITH_PLANS } from './three/bodyPlans';
 
 describe('TerraFauna 3D Atlas — Dataset, Anatomy, i18n & Security Verification', () => {
-  it('contains both living and extinct animals covering all 11 geological eras', () => {
+  it('contains both living and extinct animals covering all 13 Phanerozoic geological eras plus all 36 Animalia phyla', () => {
     const living = CURATED_ANIMALS.filter((a) => a.temporalStatus === 'living');
     const extinct = CURATED_ANIMALS.filter((a) => a.temporalStatus === 'extinct');
 
-    expect(living.length).toBe(15);
-    expect(extinct.length).toBe(12);
-    expect(CURATED_ANIMALS.length).toBe(27);
+    expect(living.length).toBe(19);
+    expect(extinct.length).toBe(23);
+    expect(CURATED_ANIMALS.length).toBe(42);
 
     const specificEras = GEOLOGICAL_ERAS.filter((e) => e.id !== 'all');
-    expect(specificEras.length).toBe(11);
+    expect(specificEras.length).toBe(13);
     for (const era of specificEras) {
       const count = CURATED_ANIMALS.filter((a) => a.eraId === era.id).length;
       expect(count, `Era ${era.id} must have at least 1 species`).toBeGreaterThanOrEqual(1);
     }
+
+    // Complete 36-phylum Animalia tree (32 extant + 4 extinct) & Holocene extinctions
+    expect(ANIMAL_KINGDOM_PHYLA.length).toBe(GLOBAL_ANIMAL_BIODIVERSITY_STATS.totalAnimalPhyla);
+    expect(ANIMAL_KINGDOM_PHYLA.filter((p) => p.status === 'extant').length).toBe(32);
+    expect(ANIMAL_KINGDOM_PHYLA.filter((p) => p.status === 'extinct').length).toBe(4);
+    expect(HOLOCENE_EXTINCT_SPECIES.length).toBeGreaterThanOrEqual(15);
+
+    const sampleSynthesized = compendiumSpeciesToAnimalRecord(HOLOCENE_EXTINCT_SPECIES[0]);
+    expect(sampleSynthesized.anatomyHotspots.length).toBe(4);
   });
 
   it('leaves dinosaurs and DinoVerse-exclusive species to DinoVerse 3D with zero overlap', () => {

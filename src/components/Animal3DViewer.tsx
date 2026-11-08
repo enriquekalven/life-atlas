@@ -93,6 +93,9 @@ const FitCamera: React.FC<{
           'shark_ichthyosaur',
           'cephalopod',
           'marine_reptile',
+          'manta_ray',
+          'cnidarian_medusa',
+          'trilobite_arthropod',
         ].includes(animal.archetype);
         const raw =
           (1.45 / Math.max(animal.metrics.lengthMeters, 0.01)) * (modelLength / 1.6);
@@ -559,8 +562,8 @@ export const Animal3DViewer: React.FC<Animal3DViewerProps> = ({
           }`}
           title="Zoom right into the 3D Eyeball Anatomy (Iris Stroma, Pupil, Cornea & Sclera)"
         >
-          <Eye className="w-3.5 h-3.5" />
-          <span>👁️ Macro Eyeball Detail</span>
+          <Eye className="w-3.5 h-3.5" aria-hidden="true" />
+          <span>Macro Eyeball Detail</span>
         </button>
       </div>
 

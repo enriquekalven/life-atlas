@@ -213,27 +213,27 @@ export function createAnimalMaps(palette: VisualPalette, params: TextureParams, 
           break;
         }
         case 'feathers': {
-          const rows = 28;
-          const cols = 14;
+          const rows = 54;
+          const cols = 28;
           const row = v * rows;
           const r = Math.floor(row);
           const fy = row - r;
           const colv = u * cols + (r % 2) * 0.5;
           const fx = colv - Math.floor(colv) - 0.5;
-          const tipDist = Math.hypot(fx * 2.1, (fy - 0.3) * 1.5);
-          const edge = smoothstep(0.86, 1.0, tipDist);
-          const barb = 0.5 + 0.5 * Math.sin(Math.atan2(fx * 2, 1.15 - fy) * 34);
+          const tipDist = Math.hypot(fx * 2.05, (fy - 0.32) * 1.45);
+          const edge = smoothstep(0.84, 1.0, tipDist);
+          const barb = 0.5 + 0.5 * Math.sin(Math.atan2(fx * 2, 1.15 - fy) * 42);
           let base = mix(primary, secondary, vent * ventralBlend);
-          base = scale(base, (1 - 0.14 * edge) * (0.97 + 0.05 * barb));
+          base = scale(base, (1 - 0.09 * edge) * (0.97 + 0.045 * barb));
           if (params.barring) {
-            const bars = smoothstep(0.72, 0.82, 0.5 + 0.5 * Math.sin(v * Math.PI * 2 * 46 + wobble * 6)) * vent;
-            base = mix(base, accent, bars * 0.7);
+            const bars = smoothstep(0.68, 0.82, 0.5 + 0.5 * Math.sin(v * Math.PI * 2 * 52 + wobble * 5)) * vent;
+            base = mix(base, accent, bars * 0.58);
           }
           if (params.tailBands && v > 0.68) {
-            const bands = smoothstep(0.7, 0.8, 0.5 + 0.5 * Math.sin(v * Math.PI * 2 * 18));
+            const bands = smoothstep(0.68, 0.8, 0.5 + 0.5 * Math.sin(v * Math.PI * 2 * 18));
             base = mix(base, accent, bands * 0.8);
           }
-          h += (1 - edge) * 0.18 + barb * 0.06;
+          h += (1 - edge) * 0.12 + barb * 0.05;
           col = base;
           break;
         }
@@ -256,11 +256,13 @@ export function createAnimalMaps(palette: VisualPalette, params: TextureParams, 
           col = mix(primary, secondary, vent * ventralBlend);
           const wr = params.wrinkles ?? 0;
           if (wr > 0) {
-            const w1 = ridged(u * 42, v * 54, seed + 16, 3, 42);
-            const w2 = ridged(u * 84, v * 72, seed + 17, 2, 84);
-            const crease = (1 - w1) * 0.6 + (1 - w2) * 0.4;
-            h += (1 - crease) * wr * 0.22;
-            col = scale(col, 1 - crease * 0.038 * wr);
+            // Cross-hatched pachyderm/sirenian water-retaining epidermal crackle channels
+            const w1 = ridged(u * 46, v * 58, seed + 16, 3, 46);
+            const w2 = ridged((u + v * 0.6) * 76, (v - u * 0.6) * 76, seed + 17, 2, 76);
+            const ringCrease = 0.5 + 0.5 * Math.sin(v * Math.PI * 2 * 64 + wobble * 8);
+            const crease = (1 - w1) * 0.5 + (1 - w2) * 0.35 + ringCrease * 0.15;
+            h += (1 - crease) * wr * 0.32;
+            col = scale(col, 1 - crease * 0.085 * wr);
           }
           if (params.spotDensity && params.spotSize) {
             const c = cellular(u * spotDensity, v * spotDensity * 1.4, seed + 18, spotDensity, 0.9);
