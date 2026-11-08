@@ -125,7 +125,7 @@ async function main() {
   }
 
   await Promise.all(Array.from({ length: concurrency }, () => worker()));
-  console.log('All 297 studio MP3 narrations synthesized and verified.');
+  console.log(`All ${jobs.length} studio MP3 narrations synthesized and verified.`);
 }
 
 main().catch((err) => {
