@@ -10,14 +10,18 @@ import {
   Dices,
   Eye,
   Globe,
+  HeartPulse,
   Layers,
   MapPin,
+  Moon,
   Pause,
   Play,
   Radio,
   Ruler,
   Search,
+  ShieldCheck,
   Sparkles,
+  Sun,
   Thermometer,
   Volume2,
   VolumeX,
@@ -33,6 +37,7 @@ import { Globe3D } from './components/Globe3D';
 import { Animal3DViewer, CameraFocusMode } from './components/Animal3DViewer';
 import { AnatomyInspector, LAYER_CONFIG } from './components/AnatomyInspector';
 import { GeologicalTimeline } from './components/GeologicalTimeline';
+import { GlobalTaxonomyBrowser } from './components/GlobalTaxonomyBrowser';
 import { QuizModal } from './components/QuizModal';
 import { SceneErrorBoundary } from './components/SceneErrorBoundary';
 import {
@@ -167,7 +172,40 @@ export function App() {
   const effectiveShowPins =
     showPins || activeMode === 'anatomy' || activeLayer !== 'exterior';
   const [showClimateBands, setShowClimateBands] = useState<boolean>(true);
-  const [isAnimating, setIsAnimating] = useState<boolean>(true);
+  const [isAnimating, setIsAnimating] = useState<boolean>(() => {
+    if (typeof window !== 'undefined' && typeof window.matchMedia === 'function') {
+      return !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+    return true;
+  });
+
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    if (typeof window === 'undefined') return 'dark';
+    const urlTheme = new URLSearchParams(window.location.search).get('theme');
+    if (urlTheme === 'light' || urlTheme === 'dark') return urlTheme;
+    try {
+      const saved = window.localStorage.getItem('tf-theme');
+      if (saved === 'light' || saved === 'dark') return saved;
+    } catch {
+      // ignore storage failure
+    }
+    return 'dark';
+  });
+
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.documentElement.dataset.theme = theme;
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) {
+        meta.setAttribute('content', theme === 'light' ? '#f8f6f0' : '#04070d');
+      }
+    }
+    try {
+      window.localStorage.setItem('tf-theme', theme);
+    } catch {
+      // ignore storage failure
+    }
+  }, [theme]);
 
   const [isSpeaking, setIsSpeaking] = useState<boolean>(false);
   const [isPlayingHeroCall, setIsPlayingHeroCall] = useState<boolean>(false);
@@ -465,8 +503,12 @@ export function App() {
     'Amphibia',
     'Chondrichthyes',
     'Actinopterygii',
+    'Sarcopterygii',
     'Cephalopoda',
     'Arthropoda',
+    'Trilobita',
+    'Merostomata',
+    'Scyphozoa',
     'Synapsida',
     'Placodermi',
   ];
@@ -521,9 +563,9 @@ export function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#04070d] text-slate-100 flex flex-col selection:bg-emerald-500/30">
+    <div className="tf-app-shell min-h-screen bg-[#04070d] text-slate-100 flex flex-col selection:bg-emerald-500/30">
       {/* Compact Museum Encyclopedia Top Masthead */}
-      <header className="sticky top-0 z-50 bg-[#04070d]/92 backdrop-blur-xl border-b border-slate-800/80 px-3 sm:px-5 py-2.5">
+      <header className="tf-masthead sticky top-0 z-50 bg-[#04070d]/92 backdrop-blur-xl border-b border-slate-800/80 px-3 sm:px-5 py-2.5">
         <div className="max-w-[1640px] mx-auto flex flex-wrap items-center justify-between gap-2.5">
           {/* Brand Identity */}
           <div className="flex items-center gap-2.5">
@@ -626,16 +668,34 @@ export function App() {
 
             <button
               type="button"
+              onClick={() => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))}
+              title={
+                theme === 'dark'
+                  ? 'Switch to Natural History Field Guide (Light Theme)'
+                  : 'Switch to Bioluminescent Abyssal Museum (Dark Theme)'
+              }
+              aria-label="Toggle light and dark theme"
+              className="p-1.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-slate-500 text-slate-200 transition cursor-pointer"
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-4 h-4 text-amber-300" aria-hidden="true" />
+              ) : (
+                <Moon className="w-4 h-4 text-sky-400" aria-hidden="true" />
+              )}
+            </button>
+
+            <button
+              type="button"
               onClick={() => setShowConsentBanner((prev) => !prev)}
               title={t.cookieButtonTitle}
               aria-label={t.cookieButtonTitle}
-              className={`px-2 py-1.5 rounded-xl border text-xs font-bold transition cursor-pointer ${
+              className={`p-1.5 rounded-xl border text-xs font-bold transition cursor-pointer ${
                 consent === 'granted'
                   ? 'bg-emerald-500/15 border-emerald-500/40 text-emerald-300'
                   : 'bg-slate-900 border-slate-700 text-slate-300 hover:border-slate-500'
               }`}
             >
-              🍪
+              <ShieldCheck className="w-4 h-4" aria-hidden="true" />
             </button>
           </div>
         </div>
@@ -678,9 +738,17 @@ export function App() {
                       : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
                   }`}
                 >
-                  {selectedAnimal.temporalStatus === 'extinct'
-                    ? `🦴 ${selectedAnimal.timeRangeMya}`
-                    : `🐾 ${selectedAnimal.conservationStatus}`}
+                  {selectedAnimal.temporalStatus === 'extinct' ? (
+                    <span className="inline-flex items-center gap-1">
+                      <Bone className="w-3 h-3" aria-hidden="true" />
+                      <span>{selectedAnimal.timeRangeMya}</span>
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-1">
+                      <HeartPulse className="w-3 h-3" aria-hidden="true" />
+                      <span>{selectedAnimal.conservationStatus}</span>
+                    </span>
+                  )}
                 </span>
               </div>
               <div className="flex items-center gap-1">
@@ -749,16 +817,25 @@ export function App() {
                       : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
                   }`}
                 >
-                  {selectedAnimal.temporalStatus === 'extinct'
-                    ? `🦴 ${selectedAnimal.timeRangeMya}`
-                    : `🐾 ${selectedAnimal.conservationStatus}`}
+                  {selectedAnimal.temporalStatus === 'extinct' ? (
+                    <span className="inline-flex items-center gap-1">
+                      <Bone className="w-3 h-3" aria-hidden="true" />
+                      <span>{selectedAnimal.timeRangeMya}</span>
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-1">
+                      <HeartPulse className="w-3 h-3" aria-hidden="true" />
+                      <span>{selectedAnimal.conservationStatus}</span>
+                    </span>
+                  )}
                 </span>
                 <span className="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-slate-900 text-sky-300 border border-slate-800">
                   {selectedAnimal.taxonomy.class}
                 </span>
                 {isPhotorealShowcase && (
-                  <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-400/15 text-amber-200 border border-amber-400/35">
-                    ✨ {enc.museumScanBadge}
+                  <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-400/15 text-amber-200 border border-amber-400/35 inline-flex items-center gap-1">
+                    <Sparkles className="w-3 h-3" aria-hidden="true" />
+                    <span>{enc.museumScanBadge}</span>
                   </span>
                 )}
               </div>
@@ -979,6 +1056,35 @@ export function App() {
         <nav
           aria-label="Encyclopedia Interactive Experiences"
           role="tablist"
+          onKeyDown={(e) => {
+            const ids = modeTabs.map((m) => m.id);
+            const cur = ids.indexOf(activeMode);
+            if (cur === -1) return;
+            const isRtl =
+              typeof document !== 'undefined' && document.documentElement.dir === 'rtl';
+            let nextIdx: number | null = null;
+            if (e.key === 'ArrowRight') {
+              nextIdx = isRtl
+                ? (cur - 1 + ids.length) % ids.length
+                : (cur + 1) % ids.length;
+            } else if (e.key === 'ArrowLeft') {
+              nextIdx = isRtl
+                ? (cur + 1) % ids.length
+                : (cur - 1 + ids.length) % ids.length;
+            } else if (e.key === 'Home') {
+              nextIdx = 0;
+            } else if (e.key === 'End') {
+              nextIdx = ids.length - 1;
+            }
+            if (nextIdx !== null) {
+              e.preventDefault();
+              handleSwitchMode(ids[nextIdx], false);
+              const nextBtn = document.querySelector<HTMLButtonElement>(
+                `[data-testid="mode-tab-${ids[nextIdx]}"]`
+              );
+              nextBtn?.focus();
+            }
+          }}
           className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 p-2 rounded-2xl bg-slate-900/90 border border-slate-800/90 shadow-xl"
         >
           {modeTabs.map((tab) => {
@@ -1190,13 +1296,14 @@ export function App() {
                     <button
                       type="button"
                       onClick={() => setCameraFocus('eye')}
-                      className={`px-3 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer ${
+                      className={`px-3 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer inline-flex items-center gap-1.5 ${
                         cameraFocus === 'eye'
                           ? 'bg-amber-400 text-slate-950'
                           : 'bg-slate-800 text-slate-200 hover:bg-slate-700'
                       }`}
                     >
-                      👁️ Zoom to 3D Eyeball
+                      <Eye className="w-3.5 h-3.5" aria-hidden="true" />
+                      <span>Zoom to 3D Eyeball</span>
                     </button>
                     <button
                       type="button"
@@ -1416,18 +1523,29 @@ export function App() {
                         <div>
                           <div className="flex flex-wrap items-center justify-between gap-1">
                             <span
-                              className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${
+                              className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase inline-flex items-center gap-1 ${
                                 isExtinct
                                   ? 'bg-orange-500/20 text-orange-300 border border-orange-500/40'
                                   : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
                               }`}
                             >
-                              {isExtinct ? '🦴 Extinct' : '🐾 Living'}
+                              {isExtinct ? (
+                                <>
+                                  <Bone className="w-3 h-3" aria-hidden="true" />
+                                  <span>Extinct</span>
+                                </>
+                              ) : (
+                                <>
+                                  <HeartPulse className="w-3 h-3" aria-hidden="true" />
+                                  <span>Living</span>
+                                </>
+                              )}
                             </span>
                             <div className="flex items-center gap-1">
                               {isScan && (
-                                <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-400/15 text-amber-200 border border-amber-400/30">
-                                  ✨ 3D Scan
+                                <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-400/15 text-amber-200 border border-amber-400/30 inline-flex items-center gap-0.5">
+                                  <Sparkles className="w-3 h-3" aria-hidden="true" />
+                                  <span>3D Scan</span>
                                 </span>
                               )}
                               {hasBadge && (
@@ -1465,6 +1583,21 @@ export function App() {
                   })}
                 </div>
               )}
+
+              {/* Tier 2: Complete 36-Phylum Kingdom Animalia Tree, Holocene Extinctions & Live Paginated Global Registry */}
+              <GlobalTaxonomyBrowser
+                onLoadSpecimen={(specimen) => {
+                  if (!CURATED_ANIMALS.some((a) => a.id === specimen.id)) {
+                    setCustomAnimals((prev) =>
+                      prev.some((p) => p.id === specimen.id)
+                        ? prev
+                        : [specimen, ...prev]
+                    );
+                  }
+                  handleSelectAnimal(specimen, true);
+                  setActiveMode('encyclopedia');
+                }}
+              />
             </div>
           )}
         </section>
@@ -1478,7 +1611,7 @@ export function App() {
         >
           <div className="flex-1 min-w-[240px]">
             <div className="text-xs font-extrabold uppercase tracking-wider text-emerald-300 flex items-center gap-1.5">
-              <span>🍪</span>
+              <ShieldCheck className="w-4 h-4" aria-hidden="true" />
               <span>{t.cookieTitle}</span>
             </div>
             <p className="text-xs text-slate-300 mt-1">{t.cookieBody}</p>

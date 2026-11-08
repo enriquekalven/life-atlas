@@ -3,6 +3,8 @@ export type TemporalStatus = 'living' | 'extinct';
 export type GeologicalEraId =
   | 'all'
   | 'cambrian'
+  | 'ordovician'
+  | 'silurian'
   | 'devonian'
   | 'carboniferous'
   | 'permian'
@@ -34,9 +36,18 @@ export type TaxonomicClass =
   | 'Reptilia'
   | 'Amphibia'
   | 'Actinopterygii'
+  | 'Sarcopterygii'
   | 'Chondrichthyes'
   | 'Cephalopoda'
   | 'Arthropoda'
+  | 'Trilobita'
+  | 'Merostomata'
+  | 'Cnidaria'
+  | 'Echinodermata'
+  | 'Annelida'
+  | 'Gastropoda'
+  | 'Bivalvia'
+  | 'Porifera'
   | 'Synapsida'
   | 'Placodermi';
 
@@ -47,11 +58,15 @@ export type BodyArchetype =
   | 'avian_raptor'
   | 'penguin'
   | 'shark_ichthyosaur'
+  | 'manta_ray'
   | 'marine_reptile'
   | 'crocodilian'
+  | 'serpentine_reptile'
   | 'amphibian'
   | 'cephalopod'
   | 'arthropod'
+  | 'trilobite_arthropod'
+  | 'cnidarian_medusa'
   | 'ursid';
 
 export type AnatomyLayer = 'exterior' | 'muscular' | 'skeletal' | 'organs';

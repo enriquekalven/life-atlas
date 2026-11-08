@@ -182,54 +182,56 @@ const P = (x: number, y: number, ry: number, rz: number): Station => ({ x, y, ry
 
 function elephantPlan(mammoth: boolean): BodyPlan {
   const spine = mammoth
-    ? [P(1.28, 0.56, 0.22, 0.19), P(1.20, 0.68, 0.34, 0.28), P(1.06, 0.82, 0.44, 0.35), P(0.86, 0.70, 0.37, 0.33),
-       P(0.55, 0.72, 0.68, 0.52), P(0.10, 0.60, 0.66, 0.54), P(-0.42, 0.50, 0.58, 0.48), P(-0.78, 0.48, 0.42, 0.35),
+    ? [P(1.30, 0.56, 0.23, 0.20), P(1.20, 0.68, 0.35, 0.29), P(1.06, 0.84, 0.45, 0.36), P(0.86, 0.70, 0.38, 0.34),
+       P(0.55, 0.74, 0.69, 0.53), P(0.10, 0.61, 0.67, 0.55), P(-0.42, 0.50, 0.58, 0.48), P(-0.78, 0.48, 0.42, 0.35),
        P(-0.98, 0.50, 0.22, 0.18), P(-1.06, 0.50, 0.08, 0.08)]
-    : [P(1.28, 0.56, 0.22, 0.19), P(1.20, 0.66, 0.33, 0.28), P(1.05, 0.74, 0.41, 0.34), P(0.86, 0.66, 0.35, 0.32),
-       P(0.56, 0.62, 0.60, 0.50), P(0.12, 0.58, 0.67, 0.55), P(-0.40, 0.58, 0.62, 0.50), P(-0.78, 0.58, 0.46, 0.38),
+    : [P(1.30, 0.56, 0.23, 0.20), P(1.20, 0.68, 0.34, 0.29), P(1.05, 0.76, 0.42, 0.35), P(0.86, 0.66, 0.36, 0.33),
+       P(0.56, 0.64, 0.62, 0.51), P(0.12, 0.59, 0.68, 0.56), P(-0.40, 0.59, 0.63, 0.51), P(-0.78, 0.58, 0.46, 0.38),
        P(-0.98, 0.60, 0.25, 0.21), P(-1.06, 0.60, 0.08, 0.08)];
   const tusks: [number, number, number][] = mammoth
-    ? [[1.14, 0.46, 0.12], [1.44, 0.20, 0.18], [1.76, 0.04, 0.20], [1.98, 0.18, 0.15], [2.02, 0.38, 0.08]]
-    : [[1.14, 0.46, 0.12], [1.38, 0.32, 0.15], [1.62, 0.16, 0.14], [1.76, 0.06, 0.11]];
+    ? [[1.14, 0.46, 0.13], [1.44, 0.20, 0.19], [1.76, 0.04, 0.21], [1.98, 0.18, 0.15], [2.02, 0.38, 0.08]]
+    : [[1.14, 0.46, 0.13], [1.40, 0.30, 0.17], [1.68, 0.16, 0.16], [1.86, 0.22, 0.11]];
   const earOutline: [number, number][] = mammoth
     ? [[0, 0.05], [-0.05, 0.1], [-0.2, 0.08], [-0.25, -0.05], [-0.18, -0.18], [-0.04, -0.14]]
-    : [[0.04, 0.10], [-0.06, 0.28], [-0.34, 0.32], [-0.56, 0.14], [-0.60, -0.18], [-0.46, -0.48], [-0.24, -0.60], [-0.06, -0.44], [0.02, -0.16]];
+    : [[0.05, 0.12], [-0.06, 0.30], [-0.36, 0.34], [-0.60, 0.16], [-0.64, -0.20], [-0.48, -0.52], [-0.24, -0.64], [-0.05, -0.44], [0.03, -0.16]];
   return {
     posture: 'quadruped',
     spine,
     limbs: [
       {
         role: 'fore',
-        points: [[0.52, 0.42, 0.24], [0.52, -0.05, 0.30], [0.50, -0.52, 0.31], [0.50, -0.95, 0.31]],
-        radii: [0.27, 0.21, 0.175, 0.19],
-        toes: { count: 4, length: 0.055, radius: 0.032, spread: 0.22 },
+        points: [[0.52, 0.42, 0.24], [0.54, -0.02, 0.30], [0.49, -0.50, 0.31], [0.51, -0.94, 0.31]],
+        radii: [0.28, 0.215, 0.19, 0.215],
+        paw: 0.20,
+        toes: { count: 4, length: 0.075, radius: 0.038, spread: 0.24, claws: true },
       },
       {
         role: 'hind',
-        points: [[-0.44, 0.44, 0.22], [-0.43, -0.05, 0.28], [-0.41, -0.52, 0.29], [-0.40, -0.95, 0.29]],
-        radii: [0.28, 0.22, 0.175, 0.19],
-        toes: { count: 4, length: 0.055, radius: 0.032, spread: 0.22 },
+        points: [[-0.44, 0.44, 0.22], [-0.40, -0.04, 0.28], [-0.44, -0.52, 0.29], [-0.41, -0.94, 0.29]],
+        radii: [0.29, 0.225, 0.185, 0.205],
+        paw: 0.19,
+        toes: { count: 4, length: 0.07, radius: 0.036, spread: 0.22, claws: true },
       },
     ],
     fins: [
-      { kind: 'ear', outline: earOutline, position: [0.94, 0.72, 0.28], thickness: 0.024, rotation: [0, mammoth ? 0.22 : 0.34, -0.05], mirror: true, color: 'primary', textured: true },
+      { kind: 'ear', outline: earOutline, position: [0.94, 0.72, 0.28], thickness: mammoth ? 0.028 : 0.042, rotation: [0, mammoth ? 0.22 : 0.36, -0.06], mirror: true, color: 'primary', textured: true },
     ],
     tubes: [
       {
         kind: 'trunk',
-        points: [[1.16, 0.56, 0], [1.34, 0.46, 0], [1.48, 0.22, 0], [1.54, -0.10, 0], [1.48, -0.46, 0], [1.40, -0.78, 0], [1.36, -0.95, 0]],
-        radii: [0.22, 0.175, 0.14, 0.115, 0.092, 0.072, 0.052],
+        points: [[1.16, 0.56, 0], [1.34, 0.46, 0], [1.48, 0.22, 0], [1.54, -0.08, 0], [1.49, -0.42, 0], [1.41, -0.74, 0], [1.46, -0.90, 0]],
+        radii: [0.225, 0.18, 0.145, 0.12, 0.096, 0.076, 0.056],
         material: 'skin',
         textured: true,
       },
-      { kind: 'tusk', points: tusks, radii: mammoth ? [0.065, 0.055, 0.045, 0.03, 0.014] : [0.055, 0.045, 0.032, 0.014], mirror: true, material: 'ivory' },
-      { kind: 'tail', points: [[-1.02, 0.56, 0], [-1.16, 0.28, 0], [-1.22, -0.05, 0], [-1.20, -0.30, 0]], radii: [0.055, 0.04, 0.03, 0.025], material: 'skin', animate: 'sway', bone: true, textured: true },
+      { kind: 'tusk', points: tusks, radii: mammoth ? [0.068, 0.056, 0.046, 0.03, 0.014] : [0.058, 0.048, 0.034, 0.014], mirror: true, material: 'ivory', bone: true },
+      { kind: 'tail', points: [[-1.02, 0.56, 0], [-1.16, 0.28, 0], [-1.22, -0.05, 0], [-1.20, -0.30, 0]], radii: [0.055, 0.04, 0.03, 0.032], material: 'skin', animate: 'sway', bone: true, textured: true },
     ],
-    eyes: [{ position: [1.14, 0.68, 0.24], radius: 0.036, mirror: true, pupil: 'round' }],
-    fur: mammoth ? { length: 0.07, shells: 2 } : null,
+    eyes: [{ position: [1.15, 0.67, 0.24], radius: 0.034, mirror: true, pupil: 'round' }],
+    fur: mammoth ? { length: 0.075, shells: 2 } : null,
     skeleton: { type: 'endo', vertebrae: [0.22, 1], ribs: [0.3, 0.64], skull: [0, 0.22], neuralSpine: 1.3, pelvisT: 0.76, scapulaT: 0.33 },
     organs: { heart: 0.4, lungs: 0.38, brain: 0.1, gut: 0.62, liver: 0.5 },
-    texture: { pattern: 'solid', wrinkles: mammoth ? 0.3 : 0.65, mottle: 0.1, normalStrength: mammoth ? 0.8 : 0.95, furGrain: mammoth ? 1 : 0 },
+    texture: { pattern: 'solid', wrinkles: mammoth ? 0.35 : 0.95, mottle: 0.16, normalStrength: mammoth ? 0.85 : 1.25, furGrain: mammoth ? 1.1 : 0 },
     animation: 'breathe',
     breath: { center: 0.42, width: 0.25, amplitude: 0.02 },
     groundRest: true,
@@ -238,45 +240,57 @@ function elephantPlan(mammoth: boolean): BodyPlan {
 
 function catPlan(saber: boolean): BodyPlan {
   const spine = saber
-    ? [P(1.42, 0.42, 0.06, 0.07), P(1.3, 0.45, 0.16, 0.16), P(1.1, 0.55, 0.27, 0.25), P(0.9, 0.5, 0.26, 0.24), P(0.6, 0.5, 0.38, 0.31),
-       P(0.25, 0.46, 0.38, 0.3), P(-0.15, 0.4, 0.33, 0.26), P(-0.5, 0.4, 0.3, 0.23), P(-0.76, 0.4, 0.19, 0.15), P(-0.86, 0.4, 0.05, 0.05)]
+    ? [P(1.44, 0.42, 0.07, 0.08), P(1.31, 0.46, 0.17, 0.17), P(1.10, 0.56, 0.28, 0.26), P(0.88, 0.52, 0.28, 0.25), P(0.58, 0.52, 0.40, 0.33),
+       P(0.22, 0.47, 0.39, 0.31), P(-0.16, 0.41, 0.34, 0.27), P(-0.50, 0.40, 0.31, 0.24), P(-0.76, 0.39, 0.19, 0.15), P(-0.86, 0.38, 0.05, 0.05)]
     : [P(1.42, 0.44, 0.05, 0.06), P(1.32, 0.46, 0.14, 0.14), P(1.14, 0.54, 0.24, 0.22), P(0.92, 0.48, 0.2, 0.19), P(0.62, 0.44, 0.31, 0.25),
        P(0.3, 0.4, 0.33, 0.26), P(-0.1, 0.38, 0.3, 0.23), P(-0.5, 0.42, 0.29, 0.21), P(-0.78, 0.44, 0.19, 0.15), P(-0.88, 0.44, 0.05, 0.05)];
-  const foreR = saber ? [0.17, 0.13, 0.1, 0.09] : [0.14, 0.11, 0.085, 0.08];
+  const foreR = saber ? [0.185, 0.145, 0.11, 0.098] : [0.14, 0.11, 0.085, 0.08];
+  const tubes: TubeSpec[] = [
+    saber
+      ? { kind: 'tail', points: [[-0.84, 0.38, 0], [-1.00, 0.29, 0.02], [-1.10, 0.17, 0.03]], radii: [0.065, 0.05, 0.032], material: 'skin', animate: 'sway', bone: true, textured: true }
+      : { kind: 'tail', points: [[-0.86, 0.42, 0], [-1.2, 0.34, 0.02], [-1.5, 0.05, 0.06], [-1.62, -0.3, 0.1]], radii: [0.065, 0.06, 0.05, 0.04], material: 'skin', animate: 'sway', bone: true, textured: true },
+    { kind: 'whisker', points: [[1.36, 0.40, 0.10], [1.45, 0.38, 0.24], [1.50, 0.34, 0.33]], radii: [0.0035, 0.0022, 0.001], mirror: true, material: 'ivory' },
+    { kind: 'whisker', points: [[1.36, 0.42, 0.10], [1.44, 0.42, 0.25], [1.49, 0.40, 0.34]], radii: [0.0035, 0.0022, 0.001], mirror: true, material: 'ivory' },
+  ];
+  if (saber) {
+    // Paired curved maxillary saber canines (28-cm laterally compressed daggers at z = ±0.085!)
+    tubes.push({
+      kind: 'tusk',
+      points: [[1.35, 0.39, 0.085], [1.38, 0.25, 0.088], [1.35, 0.11, 0.082]],
+      radii: [0.028, 0.021, 0.005],
+      mirror: true,
+      material: 'ivory',
+      bone: true,
+    });
+  }
   return {
     posture: 'quadruped',
     spine,
     limbs: [
-      { role: 'fore', points: [[0.58, 0.2, 0.18], [0.52, -0.25, 0.19], [0.55, -0.7, 0.19], [0.66, -0.95, 0.19]], radii: foreR, paw: saber ? 0.13 : 0.11, toes: { count: 4, length: 0.09, radius: 0.03, spread: 0.3, claws: false } },
-      { role: 'hind', points: [[-0.5, 0.2, 0.17], [-0.33, -0.2, 0.18], [-0.6, -0.56, 0.18], [-0.46, -0.95, 0.18]], radii: [0.17, 0.12, 0.085, 0.08], paw: 0.11, toes: { count: 4, length: 0.09, radius: 0.03, spread: 0.3 } },
+      { role: 'fore', points: [[0.56, 0.24, 0.19], [0.50, -0.22, 0.20], [0.54, -0.68, 0.20], [0.64, -0.94, 0.20]], radii: foreR, paw: saber ? 0.14 : 0.11, toes: { count: 4, length: 0.095, radius: 0.032, spread: 0.28, claws: true } },
+      { role: 'hind', points: [[-0.50, 0.22, 0.17], [-0.34, -0.20, 0.18], [-0.58, -0.58, 0.18], [-0.46, -0.94, 0.18]], radii: [0.175, 0.125, 0.09, 0.085], paw: 0.12, toes: { count: 4, length: 0.09, radius: 0.03, spread: 0.28, claws: true } },
     ],
     fins: [
-      { kind: 'ear', outline: [[0.03, 0], [0.05, 0.09], [0, 0.14], [-0.06, 0.1], [-0.07, 0]], position: [1.06, 0.72, 0.15], thickness: 0.018, rotation: [0, 0.35, 0], mirror: true, color: 'primary', textured: true },
+      { kind: 'ear', outline: [[0.03, 0], [0.05, 0.09], [0, 0.14], [-0.06, 0.1], [-0.07, 0]], position: [1.06, 0.72, 0.15], thickness: 0.02, rotation: [0, 0.35, 0], mirror: true, color: 'primary', textured: true },
     ],
-    tubes: [
-      saber
-        ? { kind: 'tail', points: [[-0.84, 0.38, 0], [-1.0, 0.3, 0.02], [-1.08, 0.18, 0.03]], radii: [0.06, 0.045, 0.03], material: 'skin', animate: 'sway', bone: true, textured: true }
-        : { kind: 'tail', points: [[-0.86, 0.42, 0], [-1.2, 0.34, 0.02], [-1.5, 0.05, 0.06], [-1.62, -0.3, 0.1]], radii: [0.065, 0.06, 0.05, 0.04], material: 'skin', animate: 'sway', bone: true, textured: true },
-      { kind: 'whisker', points: [[1.36, 0.4, 0.1], [1.52, 0.37, 0.38]], radii: [0.005, 0.002], mirror: true, material: 'ivory' },
-      { kind: 'whisker', points: [[1.36, 0.42, 0.1], [1.5, 0.43, 0.4]], radii: [0.005, 0.002], mirror: true, material: 'ivory' },
-      { kind: 'whisker', points: [[1.36, 0.38, 0.1], [1.48, 0.31, 0.38]], radii: [0.005, 0.002], mirror: true, material: 'ivory' },
-    ],
-    eyes: [{ position: [1.26, 0.56, 0.16], radius: 0.04, mirror: true, pupil: 'round' }],
-    nose: { position: [1.43, 0.44, 0], radius: 0.032 },
+    tubes,
+    eyes: [{ position: [1.26, 0.56, 0.15], radius: 0.038, mirror: true, pupil: 'round' }],
+    nose: { position: [1.44, 0.44, 0], radius: 0.034 },
     mouth: {
-      points: [[1.41, 0.37, 0], [1.34, 0.35, 0.09], [1.24, 0.36, 0.14]],
+      points: [[1.42, 0.36, 0.02], [1.34, 0.35, 0.09], [1.22, 0.36, 0.14]],
       mirror: true,
-      teeth: saber ? { count: 1, size: 0.22, from: 0.38, to: 0.38, tilt: 0.04 } : { count: 1, size: 0.06, from: 0.3, to: 0.3 },
+      teeth: saber ? undefined : { count: 2, size: 0.048, from: 0.18, to: 0.45 },
     },
-    fur: null,
-    skeleton: { type: 'endo', vertebrae: [0.2, 1], ribs: [0.3, 0.6], skull: [0, 0.2], neuralSpine: 0.9, pelvisT: 0.75, scapulaT: 0.32 },
+    fur: saber ? { length: 0.05, shells: 2 } : { length: 0.038, shells: 2 },
+    skeleton: { type: 'endo', vertebrae: [0.2, 1], ribs: [0.3, 0.6], skull: [0, 0.2], neuralSpine: 0.95, pelvisT: 0.75, scapulaT: 0.32 },
     organs: { heart: 0.36, lungs: 0.34, brain: 0.1, gut: 0.58, liver: 0.46 },
     texture: saber
-      ? { pattern: 'spots', spotDensity: 14, spotSize: 0.22, spotFill: 0.5, spotColor: 'accent', ventralBlend: 0.7, furGrain: 1, normalStrength: 0.5 }
-      : { pattern: 'stripes', stripeCount: 20, ventralBlend: 0.75, furGrain: 1, normalStrength: 0.5 },
+      ? { pattern: 'spots', spotDensity: 15, spotSize: 0.20, spotFill: 0.46, spotColor: 'accent', ventralBlend: 0.72, furGrain: 1.15, normalStrength: 0.65 }
+      : { pattern: 'stripes', stripeCount: 20, ventralBlend: 0.75, furGrain: 1.1, normalStrength: 0.55 },
     animation: 'breathe',
     breath: { center: 0.38, width: 0.22, amplitude: 0.022 },
     groundRest: true,
+    anchors: saber ? { tusk: [1.36, 0.20, 0.09] } : undefined,
   };
 }
 
@@ -457,8 +471,8 @@ function crocPlan(variant: 'croc' | 'komodo' | 'sarcosuchus'): BodyPlan {
     });
   }
   if (variant === 'komodo') {
-    tubes.push({ kind: 'tongue', points: [[1.48, -0.52, 0], [1.72, -0.54, 0], [1.9, -0.57, 0]], radii: [0.032, 0.026, 0.012], material: 'tongue', color: '#eab308', textured: false });
-    tubes.push({ kind: 'tongue', points: [[1.9, -0.57, 0], [2.04, -0.59, 0.05]], radii: [0.012, 0.004], material: 'tongue', color: '#eab308', mirror: true });
+    tubes.push({ kind: 'tongue', points: [[1.46, -0.50, 0], [1.62, -0.52, 0]], radii: [0.016, 0.010], material: 'tongue', color: '#eab308', textured: false });
+    tubes.push({ kind: 'tongue', points: [[1.62, -0.52, 0], [1.72, -0.54, 0.038]], radii: [0.009, 0.0025], material: 'tongue', color: '#eab308', mirror: true });
   }
   return {
     posture: 'sprawling',
@@ -466,38 +480,38 @@ function crocPlan(variant: 'croc' | 'komodo' | 'sarcosuchus'): BodyPlan {
     limbs: [
       {
         role: 'fore',
-        points: [[0.42, -0.54, 0.34], [0.51, -0.71, 0.52], [0.52, -0.86, 0.55], [0.56, -0.93, 0.57], [0.64, -0.96, 0.58]],
-        radii: [0.115 * lk, 0.092 * lk, 0.075 * lk, 0.064 * lk, 0.055 * lk],
-        toes: { count: 4, length: 0.14, radius: 0.024, spread: 0.28, claws: true },
+        points: [[0.42, -0.52, 0.32], [0.54, -0.64, 0.58], [0.48, -0.85, 0.56], [0.60, -0.95, 0.57]],
+        radii: [0.125 * lk, 0.098 * lk, 0.076 * lk, 0.062 * lk],
+        toes: { count: 5, length: 0.14, radius: 0.022, spread: 0.30, claws: true },
       },
       {
         role: 'hind',
-        points: [[-0.58, -0.54, 0.30], [-0.50, -0.71, 0.50], [-0.56, -0.86, 0.54], [-0.53, -0.93, 0.56], [-0.46, -0.96, 0.57]],
-        radii: [0.135 * lk, 0.105 * lk, 0.082 * lk, 0.070 * lk, 0.062 * lk],
-        toes: { count: 4, length: 0.16, radius: 0.025, spread: 0.28, claws: true },
+        points: [[-0.58, -0.52, 0.28], [-0.44, -0.64, 0.56], [-0.58, -0.85, 0.55], [-0.46, -0.95, 0.56]],
+        radii: [0.145 * lk, 0.112 * lk, 0.084 * lk, 0.066 * lk],
+        toes: { count: 5, length: 0.16, radius: 0.024, spread: 0.30, claws: true },
       },
     ],
     fins,
     tubes,
     scutes: variant === 'sarcosuchus'
-      ? { from: 0.26, to: 0.8, count: 16, rows: 3, size: 0.048, rowSpread: 0.14 }
+      ? { from: 0.24, to: 0.84, count: 18, rows: 4, size: 0.052, rowSpread: 0.16 }
       : variant === 'croc'
-        ? { from: 0.3, to: 0.76, count: 15, rows: 2, size: 0.044, rowSpread: 0.12 }
+        ? { from: 0.26, to: 0.82, count: 17, rows: 4, size: 0.048, rowSpread: 0.15 }
         : undefined,
     eyes: [isCrocLike
       ? { position: [1.00, -0.34, 0.15], radius: 0.036, mirror: true, pupil: 'slit' }
       : { position: [1.08, -0.32, 0.15], radius: 0.034, mirror: true, pupil: 'round', color: '#1c1917' }],
-    nostrils: variant === 'sarcosuchus' ? [[1.78, -0.45, 0.04]] : variant === 'croc' ? [[1.66, -0.51, 0.035]] : [[1.44, -0.44, 0.035]],
+    nostrils: variant === 'sarcosuchus' ? [[1.80, -0.44, 0.045]] : variant === 'croc' ? [[1.66, -0.51, 0.035]] : [[1.44, -0.44, 0.035]],
     mouth: variant === 'sarcosuchus'
-      ? { points: [[1.78, -0.56, 0.04], [1.52, -0.58, 0.10], [1.22, -0.58, 0.16], [0.95, -0.58, 0.25]], mirror: true, width: 0.014, teeth: { count: 12, size: 0.034, lower: true, from: 0.05, to: 0.88 } }
+      ? { points: [[1.80, -0.55, 0.05], [1.52, -0.58, 0.10], [1.22, -0.58, 0.16], [0.95, -0.58, 0.25]], mirror: true, width: 0.014, teeth: { count: 14, size: 0.042, lower: true, from: 0.04, to: 0.90 } }
       : variant === 'croc'
-        ? { points: [[1.66, -0.58, 0.04], [1.45, -0.60, 0.13], [1.20, -0.59, 0.21], [0.95, -0.59, 0.28]], mirror: true, width: 0.013, teeth: { count: 10, size: 0.032, lower: true, from: 0.05, to: 0.88 } }
-        : { points: [[1.45, -0.51, 0.03], [1.28, -0.52, 0.12], [1.00, -0.51, 0.18]], mirror: true, width: 0.01, teeth: { count: 8, size: 0.02, lower: false, from: 0.08, to: 0.88 } },
+        ? { points: [[1.66, -0.58, 0.04], [1.45, -0.60, 0.13], [1.20, -0.59, 0.21], [0.95, -0.59, 0.28]], mirror: true, width: 0.013, teeth: { count: 12, size: 0.038, lower: true, from: 0.05, to: 0.88 } }
+        : { points: [[1.45, -0.51, 0.03], [1.28, -0.52, 0.12], [1.00, -0.51, 0.18]], mirror: true, width: 0.01, teeth: { count: 8, size: 0.022, lower: false, from: 0.08, to: 0.88 } },
     skeleton: { type: 'endo', vertebrae: [0.22, 1], ribs: [0.32, 0.62], skull: [0, 0.28], neuralSpine: 0.72, spacing: 0.06, pelvisT: 0.7, scapulaT: 0.35 },
     organs: { heart: 0.36, lungs: 0.34, brain: 0.14, gut: 0.6, liver: 0.48 },
     texture: isCrocLike
-      ? { pattern: 'scales', scaleSize: 1.15, armorDorsal: true, ventralBlend: 0.65, normalStrength: 1.15, mottle: 0.16 }
-      : { pattern: 'scales', scaleSize: 1.8, ventralBlend: 0.45, normalStrength: 0.85, mottle: 0.22 },
+      ? { pattern: 'plates', scaleSize: 1.35, armorDorsal: true, ventralBlend: 0.65, normalStrength: 1.25, mottle: 0.22 }
+      : { pattern: 'plates', scaleSize: 2.2, ventralBlend: 0.45, normalStrength: 1.05, mottle: 0.28 },
     animation: 'breathe',
     breath: { center: 0.42, width: 0.25, amplitude: 0.02 },
     tailSway: 0.05,
@@ -529,28 +543,29 @@ function frogPlan(): BodyPlan {
 }
 
 function axolotlPlan(): BodyPlan {
-  const gill = (pts: [number, number, number][]): TubeSpec => ({ kind: 'gill', points: pts, radii: [0.035, 0.03, 0.02], material: 'gill', fringe: true, mirror: true, animate: 'sway' });
+  const gill = (pts: [number, number, number][]): TubeSpec => ({ kind: 'gill', points: pts, radii: [0.032, 0.026, 0.016], material: 'gill', fringe: true, mirror: true, animate: 'sway' });
   return {
     posture: 'sprawling',
     spine: [P(1.32, -0.5, 0.05, 0.1), P(1.1, -0.46, 0.13, 0.28), P(0.8, -0.43, 0.16, 0.26), P(0.4, -0.4, 0.19, 0.23), P(-0.1, -0.4, 0.19, 0.21), P(-0.55, -0.4, 0.15, 0.13), P(-1.05, -0.4, 0.09, 0.06), P(-1.45, -0.42, 0.04, 0.03), P(-1.55, -0.43, 0.01, 0.01)],
+    segmentation: { from: 0.28, to: 0.72, frequency: 12, depth: 0.035 },
     limbs: [
-      { role: 'fore', points: [[0.72, -0.56, 0.25], [0.8, -0.8, 0.38], [0.92, -0.97, 0.44]], radii: [0.05, 0.04, 0.032], toes: { count: 4, length: 0.1, radius: 0.014, spread: 0.45 } },
-      { role: 'hind', points: [[-0.5, -0.56, 0.2], [-0.42, -0.8, 0.34], [-0.3, -0.97, 0.4]], radii: [0.06, 0.045, 0.035], toes: { count: 5, length: 0.11, radius: 0.014, spread: 0.4 } },
+      { role: 'fore', points: [[0.68, -0.54, 0.22], [0.78, -0.78, 0.38], [0.90, -0.96, 0.44]], radii: [0.055, 0.042, 0.032], toes: { count: 4, length: 0.11, radius: 0.014, spread: 0.45 } },
+      { role: 'hind', points: [[-0.50, -0.54, 0.18], [-0.40, -0.78, 0.34], [-0.30, -0.96, 0.40]], radii: [0.062, 0.046, 0.035], toes: { count: 5, length: 0.12, radius: 0.014, spread: 0.40 } },
     ],
     fins: [
-      { kind: 'crest', position: [0, 0, 0], thickness: 0.02, color: 'membrane', opacity: 0.8, outline: [[-0.3, -0.2], [-0.7, -0.08], [-1.1, -0.1], [-1.4, -0.25], [-1.55, -0.43], [-1.4, -0.62], [-1.1, -0.7], [-0.7, -0.72], [-0.3, -0.6], [-0.4, -0.42]] },
+      { kind: 'crest', position: [0, 0, 0], thickness: 0.016, color: 'membrane', opacity: 0.78, outline: [[0.55, -0.22], [0.15, -0.14], [-0.35, -0.10], [-0.85, -0.10], [-1.30, -0.22], [-1.58, -0.43], [-1.35, -0.64], [-0.95, -0.68], [-0.55, -0.60], [-0.25, -0.44], [0.25, -0.34]] },
     ],
     tubes: [
-      gill([[0.95, -0.32, 0.26], [1.05, -0.15, 0.42], [1.12, -0.02, 0.52]]),
-      gill([[0.9, -0.34, 0.27], [0.92, -0.16, 0.46], [0.9, -0.02, 0.58]]),
-      gill([[0.84, -0.36, 0.27], [0.78, -0.2, 0.46], [0.7, -0.08, 0.58]]),
+      gill([[0.95, -0.32, 0.25], [1.05, -0.14, 0.42], [1.14, -0.01, 0.54]]),
+      gill([[0.90, -0.34, 0.26], [0.92, -0.15, 0.46], [0.92, -0.01, 0.58]]),
+      gill([[0.84, -0.36, 0.26], [0.78, -0.19, 0.46], [0.72, -0.06, 0.58]]),
     ],
     eyes: [{ position: [1.12, -0.4, 0.21], radius: 0.036, mirror: true, pupil: 'round', color: '#ca8a04' }],
     mouth: { points: [[1.3, -0.56, 0], [1.12, -0.56, 0.24], [0.98, -0.54, 0.3]], mirror: true, width: 0.01 },
     wet: true,
     skeleton: { type: 'endo', vertebrae: [0.2, 1], ribs: [0.32, 0.6], skull: [0, 0.25], neuralSpine: 0.4, spacing: 0.05 },
     organs: { heart: 0.38, lungs: 0.36, brain: 0.12, gut: 0.58, extras: ['gills'] },
-    texture: { pattern: 'solid', mottle: 0.15, normalStrength: 0.25, ventralBlend: 0.3 },
+    texture: { pattern: 'solid', mottle: 0.15, normalStrength: 0.3, ventralBlend: 0.35 },
     animation: 'breathe',
     breath: { center: 0.4, width: 0.25, amplitude: 0.02 },
     tailSway: 0.08,
@@ -722,7 +737,7 @@ function coelacanthPlan(): BodyPlan {
     wet: true,
     skeleton: { type: 'endo', vertebrae: [0.2, 1], ribs: [0.3, 0.55], skull: [0, 0.22], notochord: true, neuralSpine: 0.5, spacing: 0.05 },
     organs: { heart: 0.32, lungs: 0.45, brain: 0.12, gut: 0.55, liver: 0.42, extras: ['gills', 'swimBladder'] },
-    texture: { pattern: 'spots', spotDensity: 16, spotSize: 0.16, spotFill: 0.35, spotColor: 'white', scaleSize: 0.8, normalStrength: 1.1, ventralBlend: 0.25, mottle: 0.3 },
+    texture: { pattern: 'spots', spotDensity: 26, spotSize: 0.085, spotFill: 0.42, spotColor: 'white', scaleSize: 1.35, normalStrength: 1.25, ventralBlend: 0.28, mottle: 0.24 },
     animation: 'swim-lateral',
     groundRest: false,
   };
@@ -766,13 +781,15 @@ function gorgonopsidPlan(): BodyPlan {
     fins: [],
     tubes: [
       { kind: 'tail', points: [[-1.02, 0.22, 0], [-1.28, 0.12, 0.02], [-1.52, -0.02, 0.03]], radii: [0.09, 0.06, 0.025], material: 'skin', animate: 'sway', bone: true, textured: true },
+      // Paired 15-cm serrated maxillary gorgonopsid saber canines
+      { kind: 'tusk', points: [[1.36, 0.28, 0.09], [1.38, 0.13, 0.092], [1.35, 0.02, 0.086]], radii: [0.028, 0.02, 0.005], mirror: true, material: 'ivory', bone: true },
     ],
     eyes: [{ position: [1.14, 0.48, 0.16], radius: 0.038, mirror: true, pupil: 'slit', color: '#f59e0b' }],
     nostrils: [[1.45, 0.4, 0.05]],
     mouth: {
-      points: [[1.46, 0.24, 0], [1.28, 0.22, 0.11], [1.02, 0.23, 0.18]],
+      points: [[1.46, 0.24, 0.02], [1.28, 0.22, 0.11], [1.02, 0.23, 0.18]],
       mirror: true,
-      teeth: { count: 1, size: 0.26, from: 0.22, to: 0.22, tilt: 0.18 },
+      teeth: { count: 5, size: 0.032, lower: true, from: 0.25, to: 0.82 },
     },
     skeleton: { type: 'endo', vertebrae: [0.22, 1], ribs: [0.3, 0.62], skull: [0, 0.26], neuralSpine: 0.85, pelvisT: 0.72, scapulaT: 0.32 },
     organs: { heart: 0.36, lungs: 0.34, brain: 0.12, gut: 0.58, liver: 0.46 },
@@ -844,20 +861,24 @@ function basilosaurusPlan(): BodyPlan {
 function birdPlan(): BodyPlan {
   return {
     posture: 'flying',
-    spine: [P(0.6, 0.3, 0.03, 0.03), P(0.48, 0.32, 0.13, 0.12), P(0.3, 0.3, 0.14, 0.13), P(0.05, 0.24, 0.23, 0.2), P(-0.3, 0.2, 0.21, 0.18), P(-0.6, 0.21, 0.13, 0.1), P(-0.78, 0.22, 0.04, 0.04)],
-    limbs: [],
+    spine: [P(0.62, 0.31, 0.035, 0.035), P(0.49, 0.34, 0.135, 0.125), P(0.30, 0.31, 0.145, 0.135), P(0.05, 0.24, 0.24, 0.205), P(-0.30, 0.20, 0.21, 0.18), P(-0.60, 0.21, 0.13, 0.10), P(-0.80, 0.22, 0.04, 0.04)],
+    limbs: [
+      { role: 'hind', points: [[-0.18, 0.10, 0.09], [-0.08, -0.05, 0.10], [0.02, -0.16, 0.10]], radii: [0.045, 0.028, 0.020], toes: { count: 4, length: 0.085, radius: 0.011, spread: 0.36, claws: true, sickle: true } },
+    ],
     fins: [
-      { kind: 'wing', plane: 'top', position: [0.08, 0.32, 0.18], outline: [[0.2, 0], [0.22, 0.3], [0.2, 0.7], [0.1, 1.1], [-0.1, 1.5], [-0.3, 1.65], [-0.4, 1.55], [-0.45, 1.2], [-0.5, 0.8], [-0.55, 0.4], [-0.5, 0.1], [-0.3, -0.02]], thickness: 0.014, color: 'primary', mirror: true, animate: 'flap', amplitude: 0.22, textured: true, rays: 4 },
-      { kind: 'tailfan', plane: 'top', position: [-0.75, 0.22, 0], outline: [[0.05, 0.2], [-0.3, 0.28], [-0.6, 0.22], [-0.65, 0], [-0.6, -0.22], [-0.3, -0.28], [0.05, -0.2]], thickness: 0.012, color: 'primary', textured: true },
+      { kind: 'wing', plane: 'top', position: [0.08, 0.32, 0.18], outline: [[0.22, 0], [0.24, 0.32], [0.20, 0.75], [0.08, 1.18], [-0.12, 1.54], [-0.32, 1.68], [-0.42, 1.56], [-0.46, 1.20], [-0.50, 0.80], [-0.54, 0.40], [-0.48, 0.10], [-0.28, -0.02]], thickness: 0.016, color: 'primary', mirror: true, animate: 'flap', amplitude: 0.22, textured: true, rays: 5 },
+      { kind: 'tailfan', plane: 'top', position: [-0.76, 0.22, 0], outline: [[0.05, 0.18], [-0.32, 0.27], [-0.62, 0.22], [-0.66, 0], [-0.62, -0.22], [-0.32, -0.27], [0.05, -0.18]], thickness: 0.012, color: 'primary', textured: true },
     ],
     tubes: [
-      { kind: 'beak', points: [[0.6, 0.32, 0], [0.7, 0.3, 0], [0.73, 0.22, 0]], radii: [0.05, 0.04, 0.01], material: 'keratin', color: '#1f2937' },
-      { kind: 'leg', points: [[-0.2, 0.05, 0.08], [-0.05, -0.08, 0.1], [0.05, -0.12, 0.1]], radii: [0.03, 0.025, 0.02], material: 'keratin', color: '#eab308', mirror: true, bone: true },
+      // Bright yellow raptor cere at beak base + hooked slate-black tomial tip
+      { kind: 'beak', points: [[0.58, 0.33, 0], [0.65, 0.32, 0]], radii: [0.052, 0.042], material: 'keratin', color: '#facc15' },
+      { kind: 'beak', points: [[0.64, 0.32, 0], [0.72, 0.29, 0], [0.74, 0.21, 0]], radii: [0.040, 0.026, 0.007], material: 'keratin', color: '#0f172a' },
+      { kind: 'leg', points: [[-0.08, -0.05, 0.10], [0.02, -0.16, 0.10]], radii: [0.024, 0.019], material: 'keratin', color: '#eab308', mirror: true, bone: true },
     ],
-    eyes: [{ position: [0.5, 0.37, 0.1], radius: 0.045, mirror: true, pupil: 'round', color: '#111827', ring: '#facc15' }],
+    eyes: [{ position: [0.51, 0.37, 0.10], radius: 0.042, mirror: true, pupil: 'round', color: '#111827', ring: '#facc15' }],
     skeleton: { type: 'endo', vertebrae: [0.15, 1], ribs: [0.4, 0.7], skull: [0, 0.2], neuralSpine: 0.5, spacing: 0.05, keel: true, pelvisT: 0.78 },
     organs: { heart: 0.45, lungs: 0.42, brain: 0.1, gut: 0.62, extras: ['airsacs', 'crop'] },
-    texture: { pattern: 'feathers', barring: true, darkHead: 0.17, ventralBlend: 0.9, normalStrength: 0.5 },
+    texture: { pattern: 'feathers', barring: true, tailBands: true, darkHead: 0.18, ventralBlend: 0.92, normalStrength: 0.45 },
     animation: 'flap',
     groundRest: false,
     anchors: { wing: [-0.1, 0.35, 1.0] },
@@ -867,25 +888,27 @@ function birdPlan(): BodyPlan {
 function penguinPlan(): BodyPlan {
   return {
     posture: 'upright',
-    spine: [P(0.34, 1.16, 0.015, 0.015), P(0.14, 1.13, 0.07, 0.06), P(0.0, 1.1, 0.17, 0.16), P(0.0, 0.9, 0.17, 0.16), P(0.07, 0.5, 0.38, 0.34), P(0.08, 0.0, 0.42, 0.36), P(0.0, -0.5, 0.35, 0.3), P(-0.1, -0.85, 0.22, 0.19), P(-0.22, -1.0, 0.06, 0.06)],
-    limbs: [],
+    spine: [P(0.28, 1.16, 0.02, 0.02), P(0.12, 1.13, 0.08, 0.07), P(0.0, 1.08, 0.17, 0.16), P(0.0, 0.88, 0.19, 0.18), P(0.06, 0.48, 0.38, 0.34), P(0.07, -0.02, 0.42, 0.36), P(0.0, -0.52, 0.35, 0.30), P(-0.08, -0.84, 0.23, 0.20), P(-0.20, -0.96, 0.08, 0.08)],
+    limbs: [
+      { role: 'hind', points: [[0.04, -0.76, 0.14], [0.08, -0.92, 0.15], [0.22, -0.97, 0.16]], radii: [0.075, 0.055, 0.044], paw: 0.065, toes: { count: 3, length: 0.12, radius: 0.020, spread: 0.26, claws: true } },
+    ],
     fins: [
-      { kind: 'wing', position: [0.02, 0.55, 0.36], outline: [[0.05, 0.05], [0.1, -0.1], [0.05, -0.4], [-0.05, -0.72], [-0.15, -0.8], [-0.22, -0.6], [-0.2, -0.3], [-0.12, -0.05]], thickness: 0.04, color: 'primary', mirror: true, rotation: [0, -0.12, 0], animate: 'paddle', amplitude: 0.08, rays: 3 },
-      { kind: 'tailfan', position: [-0.2, -0.95, 0], outline: [[0.05, 0.05], [-0.1, 0.02], [-0.3, -0.12], [-0.28, -0.2], [-0.05, -0.1]], thickness: 0.02, color: 'primary' },
+      { kind: 'wing', position: [0.02, 0.55, 0.36], outline: [[0.05, 0.05], [0.10, -0.10], [0.05, -0.40], [-0.05, -0.72], [-0.15, -0.80], [-0.22, -0.60], [-0.20, -0.30], [-0.12, -0.05]], thickness: 0.04, color: 'primary', mirror: true, rotation: [0, -0.12, 0], animate: 'paddle', amplitude: 0.08, rays: 3 },
+      { kind: 'tailfan', position: [-0.20, -0.92, 0], outline: [[0.05, 0.05], [-0.10, 0.02], [-0.28, -0.10], [-0.26, -0.16], [-0.05, -0.08]], thickness: 0.022, color: 'primary' },
     ],
     tubes: [
-      { kind: 'leg', points: [[0.15, -0.95, 0.14], [0.36, -0.98, 0.16]], radii: [0.05, 0.04], material: 'keratin', color: '#1f2937', mirror: true },
-      { kind: 'beak', points: [[0.3, 1.16, 0.02], [0.38, 1.14, 0.015]], radii: [0.018, 0.005], material: 'keratin', color: '#f97316' },
+      { kind: 'beak', points: [[0.14, 1.12, 0], [0.30, 1.10, 0], [0.40, 1.05, 0]], radii: [0.042, 0.026, 0.008], material: 'keratin', color: '#1e293b' },
+      { kind: 'beak', points: [[0.16, 1.09, 0.018], [0.24, 1.08, 0.015], [0.32, 1.07, 0.012]], radii: [0.016, 0.011, 0.006], material: 'keratin', color: '#fb923c', mirror: true },
     ],
-    eyes: [{ position: [0.1, 1.12, 0.14], radius: 0.036, mirror: true, pupil: 'round', color: '#9a3412' }],
+    eyes: [{ position: [0.10, 1.11, 0.13], radius: 0.032, mirror: true, pupil: 'round', color: '#9a3412' }],
     skeleton: { type: 'endo', vertebrae: [0.1, 1], ribs: [0.35, 0.7], skull: [0, 0.15], neuralSpine: 0.5, spacing: 0.06, keel: true, pelvisT: 0.8,
-      internalLegs: [[[0.05, -0.3, 0.15], [0.2, -0.55, 0.16], [0.15, -0.98, 0.15]]] },
+      internalLegs: [[[0.05, -0.3, 0.15], [0.2, -0.55, 0.16], [0.15, -0.96, 0.15]]] },
     organs: { heart: 0.42, lungs: 0.4, brain: 0.06, gut: 0.6, extras: ['airsacs', 'crop'] },
-    texture: { pattern: 'countershade', sharpness: 1, darkHead: 0.22, earPatch: true, normalStrength: 0.3 },
+    texture: { pattern: 'countershade', dorsalU: 0.5, sharpness: 0.92, darkHead: 0.22, earPatch: true, normalStrength: 0.32 },
     animation: 'breathe',
     breath: { center: 0.5, width: 0.25, amplitude: 0.015 },
     groundRest: true,
-    anchors: { foot: [0.3, -0.97, 0.15], wing: [0.0, 0.1, 0.42] },
+    anchors: { foot: [0.26, -0.97, 0.16], wing: [0.0, 0.1, 0.42] },
   };
 }
 
@@ -917,6 +940,348 @@ function humanPlan(): BodyPlan {
 }
 
 /* -------------------------------------------------------------------------- */
+/*  Expanded Curated Species & Phyla Archetype Blueprints (#28–42)            */
+/* -------------------------------------------------------------------------- */
+
+function narwhalPlan(): BodyPlan {
+  return {
+    posture: 'aquatic',
+    spine: [P(1.38, 0.02, 0.14, 0.15), P(1.12, 0.04, 0.28, 0.27), P(0.68, 0.05, 0.36, 0.35), P(0.10, 0.03, 0.35, 0.34), P(-0.48, 0.01, 0.25, 0.24), P(-0.96, 0.0, 0.14, 0.12), P(-1.32, 0.0, 0.06, 0.06)],
+    limbs: [],
+    fins: [
+      { kind: 'pectoral', position: [0.56, -0.18, 0.30], outline: [[0.06, 0], [0.02, -0.26], [-0.14, -0.34], [-0.22, -0.18], [-0.12, 0]], thickness: 0.032, color: 'primary', mirror: true, rotation: [0.3, 0, -0.4], animate: 'paddle', amplitude: 0.08 },
+      { kind: 'fluke', position: [-1.30, 0.0, 0], plane: 'top', outline: [[0.08, 0], [-0.08, 0.36], [-0.22, 0.38], [-0.16, 0.04], [-0.22, -0.38], [-0.08, -0.36]], thickness: 0.028, color: 'primary', animate: 'flap', amplitude: 0.12 },
+    ],
+    tubes: [
+      { kind: 'tusk', points: [[1.36, 0.02, 0.03], [1.72, 0.03, 0.02], [2.08, 0.04, 0.01]], radii: [0.034, 0.022, 0.006], material: 'ivory', mirror: false, bone: true },
+    ],
+    eyes: [{ position: [1.14, 0.02, 0.25], radius: 0.026, mirror: true, pupil: 'round', color: '#1e293b' }],
+    skeleton: { type: 'endo', vertebrae: [0.16, 0.96], ribs: [0.24, 0.58], skull: [0, 0.18], neuralSpine: 0.28, scapulaT: 0.28 },
+    organs: { heart: 0.34, lungs: 0.38, brain: 0.08, gut: 0.58, liver: 0.48 },
+    texture: { pattern: 'spots', mottle: 0.42, spotDensity: 26, spotSize: 0.06, ventralBlend: 0.85, normalStrength: 0.28 },
+    wet: true,
+    animation: 'swim-vertical',
+    groundRest: false,
+  };
+}
+
+function platypusPlan(): BodyPlan {
+  return {
+    posture: 'sprawling',
+    spine: [P(1.08, 0.08, 0.08, 0.12), P(0.84, 0.12, 0.15, 0.17), P(0.52, 0.14, 0.21, 0.25), P(0.05, 0.15, 0.23, 0.28), P(-0.46, 0.13, 0.20, 0.24), P(-0.82, 0.09, 0.11, 0.18), P(-1.22, 0.06, 0.05, 0.20)],
+    limbs: [
+      { role: 'fore', points: [[0.46, 0.04, 0.22], [0.50, -0.10, 0.36], [0.54, -0.22, 0.40]], radii: [0.068, 0.052, 0.045], paw: 0.075, toes: { count: 5, length: 0.065, radius: 0.012, spread: 0.38, claws: true } },
+      { role: 'hind', points: [[-0.44, 0.04, 0.20], [-0.50, -0.10, 0.32], [-0.54, -0.22, 0.35]], radii: [0.065, 0.048, 0.042], paw: 0.068, toes: { count: 5, length: 0.06, radius: 0.011, spread: 0.34, claws: true } },
+    ],
+    fins: [
+      { kind: 'tailfan', position: [-0.82, 0.08, 0], plane: 'top', outline: [[0.06, 0], [-0.14, 0.20], [-0.46, 0.22], [-0.56, 0], [-0.46, -0.22], [-0.14, -0.20]], thickness: 0.048, color: 'dark' },
+    ],
+    tubes: [
+      { kind: 'beak', points: [[0.98, 0.08, 0], [1.24, 0.06, 0], [1.38, 0.05, 0]], radii: [0.11, 0.12, 0.085], material: 'keratin', color: '#334155' },
+    ],
+    eyes: [{ position: [0.90, 0.16, 0.14], radius: 0.022, mirror: true, pupil: 'round', color: '#451a03' }],
+    fur: { length: 0.032, shells: 2 },
+    skeleton: { type: 'endo', vertebrae: [0.16, 0.94], ribs: [0.28, 0.66], skull: [0, 0.20], pelvisT: 0.72, scapulaT: 0.30 },
+    organs: { heart: 0.36, lungs: 0.38, brain: 0.10, gut: 0.58, liver: 0.48 },
+    texture: { pattern: 'countershade', furGrain: 0.65, ventralBlend: 0.78, normalStrength: 0.36 },
+    wet: true,
+    animation: 'breathe',
+    groundRest: true,
+  };
+}
+
+function mantaRayPlan(): BodyPlan {
+  return {
+    posture: 'aquatic',
+    spine: [P(0.95, 0.0, 0.10, 0.42), P(0.62, 0.02, 0.16, 0.62), P(0.18, 0.03, 0.18, 0.68), P(-0.28, 0.02, 0.14, 0.46), P(-0.68, 0.0, 0.08, 0.20), P(-1.18, -0.02, 0.03, 0.04)],
+    limbs: [],
+    fins: [
+      { kind: 'pectoral', position: [0.18, 0.01, 0.36], plane: 'top', outline: [[0.52, 0], [0.12, 0.96], [-0.26, 1.12], [-0.54, 0.48], [-0.46, 0]], thickness: 0.048, color: 'primary', mirror: true, animate: 'flap', amplitude: 0.16 },
+      { kind: 'flap', position: [0.92, -0.01, 0.26], outline: [[0, 0.05], [0.28, 0.04], [0.32, -0.04], [0.04, -0.06]], thickness: 0.026, color: 'secondary', mirror: true },
+    ],
+    tubes: [
+      { kind: 'tail', points: [[-0.68, 0.0, 0], [-1.12, -0.02, 0], [-1.52, -0.04, 0]], radii: [0.038, 0.020, 0.008], material: 'skin', animate: 'sway' },
+    ],
+    eyes: [{ position: [0.84, 0.03, 0.40], radius: 0.028, mirror: true, pupil: 'round', color: '#0f172a' }],
+    gillSlits: { x0: 0.48, dx: -0.09, count: 5, y: -0.10, z: 0.26, height: 0.10 },
+    skeleton: { type: 'cartilage', vertebrae: [0.14, 0.92], ribs: [0.22, 0.68], skull: [0, 0.20] },
+    organs: { heart: 0.32, lungs: 0.30, brain: 0.10, gut: 0.54, liver: 0.44, extras: ['gills', 'bigLiver'] },
+    texture: { pattern: 'countershade', sharpness: 0.88, ventralBlend: 0.95, spotDensity: 8, normalStrength: 0.24 },
+    wet: true,
+    animation: 'flap',
+    groundRest: false,
+  };
+}
+
+function cnidarianMedusaPlan(): BodyPlan {
+  return {
+    posture: 'invertebrate',
+    spine: [P(0.18, 0.82, 0.08, 0.08), P(0.11, 0.72, 0.42, 0.42), P(0.04, 0.56, 0.68, 0.68), P(-0.04, 0.38, 0.74, 0.74), P(-0.11, 0.26, 0.56, 0.56), P(-0.18, 0.18, 0.24, 0.24)],
+    limbs: [],
+    fins: [
+      { kind: 'frill', position: [0.0, 0.24, 0.14], outline: [[0.08, 0], [0.14, -0.42], [0.02, -0.78], [-0.10, -0.62], [-0.08, -0.12]], thickness: 0.024, color: 'accent', opacity: 0.82, mirror: true, animate: 'undulate', amplitude: 0.12 },
+    ],
+    tubes: [
+      { kind: 'arm', points: [[0.14, 0.24, 0.26], [0.18, -0.28, 0.32], [0.10, -0.86, 0.24]], radii: [0.022, 0.012, 0.005], material: 'membrane', color: '#fb923c', mirror: true, animate: 'sway' },
+      { kind: 'arm', points: [[-0.16, 0.24, 0.26], [-0.22, -0.32, 0.30], [-0.14, -0.92, 0.22]], radii: [0.020, 0.011, 0.005], material: 'membrane', color: '#fda4af', mirror: true, animate: 'sway' },
+      { kind: 'arm', points: [[0.0, 0.24, 0.38], [0.04, -0.36, 0.42], [-0.02, -0.95, 0.34]], radii: [0.018, 0.010, 0.004], material: 'membrane', color: '#fde047', mirror: true, animate: 'sway' },
+    ],
+    eyes: [{ position: [0.0, 0.32, 0.68], radius: 0.018, mirror: true, pupil: 'none', color: '#fef08a' }],
+    skeleton: { type: 'none', vertebrae: [0, 0], skull: [0.05, 0.25] },
+    organs: { heart: 0.38, lungs: 0.44, brain: 0.20, gut: 0.56, liver: 0.48 },
+    texture: { pattern: 'spots', mottle: 0.35, ventralBlend: 0.6, normalStrength: 0.22 },
+    wet: true,
+    animation: 'float',
+    groundRest: false,
+  };
+}
+
+function dodoPlan(): BodyPlan {
+  return {
+    posture: 'biped',
+    spine: [P(0.62, 0.66, 0.13, 0.12), P(0.46, 0.58, 0.14, 0.13), P(0.32, 0.40, 0.16, 0.16), P(0.10, 0.16, 0.36, 0.34), P(-0.22, 0.08, 0.38, 0.36), P(-0.52, 0.14, 0.24, 0.22), P(-0.68, 0.24, 0.10, 0.10)],
+    limbs: [
+      { role: 'hind', points: [[-0.08, -0.10, 0.15], [-0.04, -0.48, 0.15], [0.04, -0.82, 0.15]], radii: [0.085, 0.052, 0.038], paw: 0.055, toes: { count: 4, length: 0.11, radius: 0.018, spread: 0.32, claws: true } },
+    ],
+    fins: [
+      { kind: 'wing', position: [0.08, 0.22, 0.32], outline: [[0.06, 0.04], [0.04, -0.18], [-0.14, -0.26], [-0.24, -0.14], [-0.16, 0.04]], thickness: 0.036, color: 'primary', mirror: true },
+      { kind: 'tailfan', position: [-0.66, 0.26, 0], outline: [[0.02, 0.04], [-0.08, 0.24], [-0.24, 0.22], [-0.22, 0.04], [-0.06, -0.04]], thickness: 0.055, color: 'ivory' },
+    ],
+    tubes: [
+      { kind: 'beak', points: [[0.66, 0.64, 0], [0.92, 0.62, 0], [1.06, 0.53, 0]], radii: [0.085, 0.095, 0.032], material: 'keratin', color: '#cbd5e1' },
+    ],
+    eyes: [{ position: [0.60, 0.69, 0.10], radius: 0.028, mirror: true, pupil: 'round', color: '#fef08a' }],
+    skeleton: { type: 'endo', vertebrae: [0.14, 0.94], ribs: [0.36, 0.72], skull: [0, 0.18], keel: true, pelvisT: 0.74 },
+    organs: { heart: 0.42, lungs: 0.40, brain: 0.08, gut: 0.62, liver: 0.52, extras: ['crop', 'airsacs'] },
+    texture: { pattern: 'feathers', ventralBlend: 0.75, darkHead: 0.14, normalStrength: 0.42 },
+    animation: 'breathe',
+    groundRest: true,
+  };
+}
+
+function thylacinePlan(): BodyPlan {
+  return {
+    posture: 'quadruped',
+    spine: [P(1.22, 0.38, 0.10, 0.09), P(1.00, 0.44, 0.16, 0.14), P(0.76, 0.40, 0.16, 0.14), P(0.46, 0.34, 0.27, 0.22), P(0.02, 0.32, 0.25, 0.20), P(-0.44, 0.33, 0.24, 0.19), P(-0.78, 0.28, 0.12, 0.10), P(-1.26, 0.16, 0.04, 0.04)],
+    limbs: [
+      { role: 'fore', points: [[0.46, 0.22, 0.15], [0.48, -0.14, 0.16], [0.50, -0.52, 0.16]], radii: [0.088, 0.058, 0.044], paw: 0.058, toes: { count: 5, length: 0.055, radius: 0.013, spread: 0.24, claws: true } },
+      { role: 'hind', points: [[-0.44, 0.22, 0.15], [-0.52, -0.12, 0.16], [-0.44, -0.52, 0.16]], radii: [0.102, 0.064, 0.046], paw: 0.060, toes: { count: 4, length: 0.058, radius: 0.014, spread: 0.22, claws: true } },
+    ],
+    fins: [
+      { kind: 'ear', position: [0.94, 0.56, 0.10], outline: [[0, 0], [0.04, 0.12], [-0.04, 0.14], [-0.07, 0.02]], thickness: 0.018, color: 'primary', mirror: true },
+    ],
+    tubes: [],
+    eyes: [{ position: [1.04, 0.46, 0.11], radius: 0.026, mirror: true, pupil: 'round', color: '#451a03' }],
+    mouth: { points: [[1.24, 0.34, 0.04], [1.08, 0.33, 0.08], [0.92, 0.35, 0.10]], teeth: { count: 7, size: 0.026 } },
+    fur: { length: 0.026, shells: 2 },
+    skeleton: { type: 'endo', vertebrae: [0.16, 0.94], ribs: [0.30, 0.64], skull: [0, 0.18], pelvisT: 0.72, scapulaT: 0.32 },
+    organs: { heart: 0.38, lungs: 0.36, brain: 0.08, gut: 0.58, liver: 0.48 },
+    texture: { pattern: 'stripes', stripeCount: 16, furGrain: 0.55, ventralBlend: 0.68, normalStrength: 0.34 },
+    animation: 'breathe',
+    groundRest: true,
+  };
+}
+
+function stellersSeaCowPlan(): BodyPlan {
+  return {
+    posture: 'aquatic',
+    spine: [P(1.36, -0.06, 0.16, 0.17), P(1.14, 0.02, 0.24, 0.25), P(0.76, 0.06, 0.44, 0.45), P(0.16, 0.08, 0.54, 0.55), P(-0.46, 0.04, 0.42, 0.42), P(-0.98, 0.0, 0.22, 0.20), P(-1.38, 0.0, 0.08, 0.08)],
+    limbs: [
+      { role: 'fore', points: [[0.72, -0.22, 0.34], [0.68, -0.44, 0.38], [0.76, -0.52, 0.34]], radii: [0.11, 0.085, 0.065], paw: 0.07 },
+    ],
+    fins: [
+      { kind: 'fluke', position: [-1.34, 0.0, 0], plane: 'top', outline: [[0.10, 0], [-0.10, 0.42], [-0.28, 0.44], [-0.18, 0.05], [-0.28, -0.44], [-0.10, -0.42]], thickness: 0.036, color: 'primary', animate: 'flap', amplitude: 0.10 },
+    ],
+    tubes: [],
+    eyes: [{ position: [1.18, 0.06, 0.21], radius: 0.022, mirror: true, pupil: 'round', color: '#1e293b' }],
+    skeleton: { type: 'endo', vertebrae: [0.16, 0.95], ribs: [0.24, 0.68], skull: [0, 0.16], scapulaT: 0.26 },
+    organs: { heart: 0.32, lungs: 0.42, brain: 0.07, gut: 0.62, liver: 0.50 },
+    texture: { pattern: 'solid', wrinkles: 0.85, mottle: 0.25, normalStrength: 0.55 },
+    wet: true,
+    animation: 'swim-vertical',
+    groundRest: false,
+  };
+}
+
+function trilobitePlan(): BodyPlan {
+  return {
+    posture: 'invertebrate',
+    spine: [P(0.98, 0.04, 0.10, 0.44), P(0.68, 0.08, 0.16, 0.56), P(0.24, 0.09, 0.15, 0.50), P(-0.24, 0.08, 0.13, 0.42), P(-0.68, 0.06, 0.10, 0.30), P(-1.04, 0.03, 0.06, 0.16)],
+    segmentation: { frequency: 16, depth: 0.14, from: 0.18, to: 0.92 },
+    limbs: [],
+    fins: [],
+    tubes: [
+      { kind: 'spike', points: [[0.66, 0.02, 0.52], [0.28, 0.01, 0.64], [-0.18, 0.0, 0.58]], radii: [0.042, 0.024, 0.006], material: 'chitin', mirror: true },
+      { kind: 'antenna', points: [[0.96, 0.02, 0.14], [1.26, 0.04, 0.28], [1.46, 0.06, 0.42]], radii: [0.018, 0.011, 0.004], material: 'chitin', mirror: true, animate: 'sway' },
+      { kind: 'spike', points: [[-1.02, 0.03, 0], [-1.19, 0.025, 0], [-1.36, 0.02, 0]], radii: [0.032, 0.018, 0.005], material: 'chitin', mirror: false },
+    ],
+    eyes: [{ position: [0.76, 0.15, 0.30], radius: 0.046, mirror: true, pupil: 'compound', color: '#fde68a' }],
+    skeleton: { type: 'exo', vertebrae: [0.16, 0.92], skull: [0, 0.24] },
+    organs: { heart: 0.42, lungs: 0.48, brain: 0.12, gut: 0.58, liver: 0.36, extras: ['dorsalVessel', 'gills'] },
+    texture: { pattern: 'plates', segmentBands: 16, armorEnd: 0.95, normalStrength: 0.48 },
+    wet: true,
+    animation: 'crawl',
+    groundRest: true,
+  };
+}
+
+function camerocerasPlan(): BodyPlan {
+  return {
+    posture: 'aquatic',
+    spine: [P(0.84, 0.0, 0.24, 0.24), P(0.56, 0.02, 0.28, 0.28), P(0.12, 0.02, 0.25, 0.25), P(-0.42, 0.02, 0.19, 0.19), P(-0.98, 0.02, 0.12, 0.12), P(-1.52, 0.02, 0.04, 0.04)],
+    segmentation: { frequency: 14, depth: 0.04, from: 0.18, to: 0.98 },
+    limbs: [],
+    fins: [],
+    tubes: [
+      { kind: 'arm', points: [[0.82, 0.06, 0.12], [1.18, 0.10, 0.18], [1.50, 0.04, 0.12]], radii: [0.042, 0.026, 0.008], material: 'skin', suckers: true, mirror: true, animate: 'sway' },
+      { kind: 'arm', points: [[0.82, -0.06, 0.14], [1.20, -0.10, 0.20], [1.52, -0.04, 0.14]], radii: [0.040, 0.024, 0.008], material: 'skin', suckers: true, mirror: true, animate: 'sway' },
+      { kind: 'arm', points: [[0.84, 0.0, 0.18], [1.22, 0.0, 0.26], [1.56, 0.02, 0.18]], radii: [0.038, 0.022, 0.007], material: 'skin', suckers: true, mirror: true, animate: 'sway' },
+      { kind: 'siphon', points: [[0.64, -0.20, 0], [0.76, -0.22, 0], [0.88, -0.24, 0]], radii: [0.048, 0.040, 0.032], material: 'skin', mirror: false },
+    ],
+    eyes: [{ position: [0.74, 0.05, 0.23], radius: 0.048, mirror: true, pupil: 'hslit', color: '#fef08a' }],
+    skeleton: { type: 'exo', vertebrae: [0.20, 0.98], skull: [0, 0.20] },
+    organs: { heart: 0.30, lungs: 0.28, brain: 0.12, gut: 0.52, liver: 0.44, extras: ['threeHearts', 'gills', 'inkSac'] },
+    texture: { pattern: 'plates', segmentBands: 14, armorEnd: 0.82, normalStrength: 0.40 },
+    wet: true,
+    animation: 'hover',
+    groundRest: false,
+  };
+}
+
+function eurypterusPlan(): BodyPlan {
+  return {
+    posture: 'invertebrate',
+    spine: [P(1.04, 0.04, 0.10, 0.30), P(0.76, 0.06, 0.13, 0.34), P(0.34, 0.06, 0.12, 0.32), P(-0.14, 0.05, 0.10, 0.26), P(-0.58, 0.04, 0.08, 0.16), P(-0.98, 0.03, 0.05, 0.09)],
+    segmentation: { frequency: 12, depth: 0.10, from: 0.20, to: 0.94 },
+    limbs: [],
+    fins: [
+      { kind: 'pectoral', position: [0.62, -0.02, 0.28], plane: 'top', outline: [[0.06, 0], [-0.04, 0.46], [-0.24, 0.52], [-0.30, 0.26], [-0.14, 0]], thickness: 0.026, color: 'accent', mirror: true, animate: 'paddle', amplitude: 0.14 },
+    ],
+    tubes: [
+      { kind: 'leg', points: [[0.86, -0.02, 0.22], [1.04, -0.08, 0.38], [1.14, -0.14, 0.32]], radii: [0.026, 0.018, 0.008], material: 'chitin', spines: 4, mirror: true },
+      { kind: 'leg', points: [[0.76, -0.02, 0.25], [0.88, -0.10, 0.44], [0.94, -0.16, 0.40]], radii: [0.026, 0.018, 0.008], material: 'chitin', spines: 4, mirror: true },
+      { kind: 'spike', points: [[-0.96, 0.03, 0], [-1.21, 0.025, 0], [-1.46, 0.02, 0]], radii: [0.038, 0.020, 0.005], material: 'chitin', mirror: false },
+    ],
+    eyes: [{ position: [0.90, 0.11, 0.18], radius: 0.038, mirror: true, pupil: 'compound', color: '#1e293b' }],
+    skeleton: { type: 'exo', vertebrae: [0.16, 0.94], skull: [0, 0.22] },
+    organs: { heart: 0.40, lungs: 0.46, brain: 0.12, gut: 0.58, liver: 0.36, extras: ['dorsalVessel', 'gills'] },
+    texture: { pattern: 'plates', segmentBands: 12, armorEnd: 0.96, normalStrength: 0.44 },
+    wet: true,
+    animation: 'swim-lateral',
+    groundRest: false,
+  };
+}
+
+function tiktaalikPlan(): BodyPlan {
+  return {
+    posture: 'sprawling',
+    spine: [P(1.26, 0.06, 0.07, 0.18), P(0.96, 0.10, 0.11, 0.26), P(0.62, 0.12, 0.16, 0.26), P(0.12, 0.12, 0.19, 0.25), P(-0.42, 0.10, 0.16, 0.20), P(-0.92, 0.07, 0.11, 0.11), P(-1.38, 0.05, 0.04, 0.03)],
+    limbs: [
+      { role: 'fore', points: [[0.56, 0.0, 0.22], [0.62, -0.16, 0.34], [0.70, -0.24, 0.38]], radii: [0.078, 0.062, 0.052], paw: 0.075 },
+      { role: 'hind', points: [[-0.42, 0.0, 0.18], [-0.48, -0.15, 0.28], [-0.54, -0.23, 0.32]], radii: [0.068, 0.052, 0.044], paw: 0.065 },
+    ],
+    fins: [
+      { kind: 'caudal', position: [-0.94, 0.07, 0], outline: [[0.08, 0.06], [-0.28, 0.18], [-0.54, 0.0], [-0.28, -0.16], [0.08, -0.06]], thickness: 0.024, color: 'secondary', rays: 8, animate: 'undulate', amplitude: 0.10 },
+    ],
+    tubes: [],
+    eyes: [{ position: [0.98, 0.19, 0.11], radius: 0.030, mirror: true, pupil: 'round', color: '#ca8a04' }],
+    skeleton: { type: 'endo', vertebrae: [0.18, 0.94], ribs: [0.26, 0.68], skull: [0, 0.22], pelvisT: 0.68, scapulaT: 0.28 },
+    organs: { heart: 0.34, lungs: 0.38, brain: 0.10, gut: 0.58, liver: 0.48, extras: ['gills'] },
+    texture: { pattern: 'scales', scaleSize: 0.042, mottle: 0.28, ventralBlend: 0.72, normalStrength: 0.42 },
+    wet: true,
+    animation: 'swim-lateral',
+    groundRest: true,
+  };
+}
+
+function helicoprionPlan(): BodyPlan {
+  return {
+    posture: 'aquatic',
+    spine: [P(1.40, 0.04, 0.09, 0.09), P(1.06, 0.04, 0.22, 0.20), P(0.56, 0.05, 0.32, 0.28), P(-0.04, 0.04, 0.30, 0.26), P(-0.62, 0.02, 0.19, 0.16), P(-1.12, 0.0, 0.09, 0.08), P(-1.42, 0.0, 0.04, 0.04)],
+    limbs: [],
+    fins: [
+      { kind: 'dorsal', position: [0.16, 0.31, 0], outline: [[0.18, -0.04], [-0.04, 0.40], [-0.24, 0.36], [-0.28, -0.04]], thickness: 0.028, color: 'primary' },
+      { kind: 'pectoral', position: [0.54, -0.18, 0.24], outline: [[0.10, 0], [-0.06, -0.44], [-0.28, -0.42], [-0.22, 0]], thickness: 0.028, color: 'primary', mirror: true, rotation: [0.35, 0, -0.45] },
+      { kind: 'caudal', position: [-1.32, 0.0, 0], outline: [[0.08, 0], [-0.26, 0.46], [-0.36, 0.38], [-0.14, 0], [-0.34, -0.42], [-0.22, -0.44]], thickness: 0.026, color: 'primary', animate: 'undulate', amplitude: 0.14 },
+    ],
+    tubes: [],
+    rings: [
+      { position: [1.18, -0.11, 0], radius: 0.12, tube: 0.028, color: '#f8fafc', rotation: [0, 0, 0] },
+      { position: [1.18, -0.11, 0], radius: 0.072, tube: 0.022, color: '#e2e8f0', rotation: [0, 0, 0] },
+    ],
+    eyes: [{ position: [1.12, 0.08, 0.17], radius: 0.032, mirror: true, pupil: 'round', color: '#0ea5e9' }],
+    gillSlits: { x0: 0.84, dx: -0.05, count: 4, y: -0.02, z: 0.22, height: 0.12 },
+    skeleton: { type: 'cartilage', vertebrae: [0.16, 0.94], skull: [0, 0.20] },
+    organs: { heart: 0.32, lungs: 0.30, brain: 0.09, gut: 0.56, liver: 0.46, extras: ['gills', 'bigLiver'] },
+    texture: { pattern: 'countershade', sharpness: 0.78, ventralBlend: 0.88, normalStrength: 0.26 },
+    wet: true,
+    animation: 'swim-lateral',
+    groundRest: false,
+  };
+}
+
+function titanoboaPlan(): BodyPlan {
+  return {
+    posture: 'sprawling',
+    spine: [P(1.36, 0.14, 0.09, 0.12), P(1.10, 0.16, 0.13, 0.17), P(0.76, 0.12, 0.15, 0.16), P(0.28, 0.10, 0.20, 0.22), P(-0.26, 0.10, 0.21, 0.23), P(-0.78, 0.09, 0.17, 0.19), P(-1.22, 0.07, 0.11, 0.12), P(-1.52, 0.05, 0.04, 0.04)],
+    limbs: [],
+    fins: [],
+    tubes: [
+      { kind: 'tail', points: [[-0.36, 0.08, 0.22], [-0.04, 0.08, 0.48], [0.42, 0.08, 0.42], [0.58, 0.07, 0.18]], radii: [0.15, 0.14, 0.12, 0.09], material: 'skin', mirror: false, textured: true },
+      { kind: 'tongue', points: [[1.36, 0.11, 0], [1.43, 0.105, 0.015], [1.50, 0.10, 0.03]], radii: [0.010, 0.007, 0.004], material: 'tongue', mirror: true },
+    ],
+    eyes: [{ position: [1.22, 0.19, 0.12], radius: 0.024, mirror: true, pupil: 'slit', color: '#eab308' }],
+    skeleton: { type: 'endo', vertebrae: [0.14, 0.96], ribs: [0.18, 0.88], skull: [0, 0.16], spacing: 0.045 },
+    organs: { heart: 0.30, lungs: 0.42, brain: 0.07, gut: 0.62, liver: 0.50 },
+    texture: { pattern: 'spots', scaleSize: 0.038, spotDensity: 18, spotSize: 0.09, ventralBlend: 0.72, normalStrength: 0.46 },
+    animation: 'swim-lateral',
+    groundRest: true,
+  };
+}
+
+function livyatanPlan(): BodyPlan {
+  return {
+    posture: 'aquatic',
+    spine: [P(1.42, 0.08, 0.34, 0.28), P(1.04, 0.10, 0.44, 0.36), P(0.52, 0.06, 0.46, 0.40), P(-0.08, 0.03, 0.38, 0.34), P(-0.66, 0.01, 0.24, 0.21), P(-1.12, 0.0, 0.12, 0.10), P(-1.44, 0.0, 0.05, 0.05)],
+    limbs: [],
+    fins: [
+      { kind: 'dorsal', position: [-0.28, 0.36, 0], outline: [[0.18, -0.04], [-0.06, 0.18], [-0.26, 0.14], [-0.30, -0.04]], thickness: 0.04, color: 'primary' },
+      { kind: 'pectoral', position: [0.46, -0.22, 0.34], outline: [[0.08, 0], [-0.04, -0.34], [-0.22, -0.36], [-0.24, -0.10], [-0.12, 0]], thickness: 0.036, color: 'primary', mirror: true, rotation: [0.3, 0, -0.4], animate: 'paddle', amplitude: 0.08 },
+      { kind: 'fluke', position: [-1.40, 0.0, 0], plane: 'top', outline: [[0.10, 0], [-0.10, 0.44], [-0.28, 0.46], [-0.18, 0.04], [-0.28, -0.46], [-0.10, -0.44]], thickness: 0.032, color: 'primary', animate: 'flap', amplitude: 0.12 },
+    ],
+    tubes: [],
+    mouth: { points: [[1.40, -0.14, 0.10], [1.14, -0.16, 0.18], [0.86, -0.14, 0.22]], teeth: { count: 9, size: 0.052, lower: true } },
+    eyes: [{ position: [0.92, -0.02, 0.34], radius: 0.028, mirror: true, pupil: 'round', color: '#1e293b' }],
+    skeleton: { type: 'endo', vertebrae: [0.22, 0.96], ribs: [0.28, 0.62], skull: [0, 0.24], neuralSpine: 0.32, scapulaT: 0.28 },
+    organs: { heart: 0.36, lungs: 0.40, brain: 0.10, gut: 0.60, liver: 0.50 },
+    texture: { pattern: 'countershade', wrinkles: 0.45, mottle: 0.22, ventralBlend: 0.72, normalStrength: 0.36 },
+    wet: true,
+    animation: 'swim-vertical',
+    groundRest: false,
+  };
+}
+
+function megatheriumPlan(): BodyPlan {
+  return {
+    posture: 'quadruped',
+    spine: [P(1.18, 0.56, 0.16, 0.15), P(0.96, 0.62, 0.24, 0.22), P(0.72, 0.58, 0.28, 0.26), P(0.36, 0.54, 0.46, 0.42), P(-0.14, 0.48, 0.54, 0.50), P(-0.58, 0.36, 0.44, 0.40), P(-0.96, 0.16, 0.24, 0.22), P(-1.32, -0.12, 0.12, 0.12)],
+    limbs: [
+      { role: 'fore', points: [[0.42, 0.38, 0.30], [0.48, -0.06, 0.34], [0.52, -0.56, 0.32]], radii: [0.18, 0.14, 0.12], paw: 0.14, toes: { count: 3, length: 0.18, radius: 0.028, spread: 0.26, claws: true, sickle: true } },
+      { role: 'hind', points: [[-0.48, 0.28, 0.32], [-0.52, -0.16, 0.34], [-0.46, -0.56, 0.32]], radii: [0.24, 0.18, 0.15], paw: 0.18, toes: { count: 3, length: 0.12, radius: 0.026, spread: 0.22, claws: true } },
+    ],
+    fins: [],
+    tubes: [],
+    eyes: [{ position: [1.02, 0.64, 0.18], radius: 0.028, mirror: true, pupil: 'round', color: '#451a03' }],
+    fur: { length: 0.058, shells: 2 },
+    skeleton: { type: 'endo', vertebrae: [0.16, 0.95], ribs: [0.28, 0.68], skull: [0, 0.18], pelvisT: 0.72, scapulaT: 0.30 },
+    organs: { heart: 0.36, lungs: 0.38, brain: 0.08, gut: 0.58, liver: 0.48 },
+    texture: { pattern: 'solid', furGrain: 0.80, mottle: 0.22, normalStrength: 0.44 },
+    animation: 'breathe',
+    groundRest: true,
+  };
+}
+
+/* -------------------------------------------------------------------------- */
 /*  Resolution                                                                 */
 /* -------------------------------------------------------------------------- */
 
@@ -927,7 +1292,7 @@ const SPECIES_PLANS: Record<string, () => BodyPlan> = {
   'smilodon-fatalis': () => catPlan(true),
   'polar-bear': () => bearPlan(),
   'blue-whale': () => whalePlan(),
-  'livyatan-melvillei': () => whalePlan(),
+  'livyatan-melvillei': () => livyatanPlan(),
   'great-white-shark': () => sharkPlan(false),
   'otodus-megalodon': () => sharkPlan(true),
   'archelon-ischyros': () => archelonPlan(),
@@ -949,6 +1314,20 @@ const SPECIES_PLANS: Record<string, () => BodyPlan> = {
   'peregrine-falcon': () => birdPlan(),
   'emperor-penguin': () => penguinPlan(),
   'homo-sapiens': () => humanPlan(),
+  'narwhal': () => narwhalPlan(),
+  'platypus': () => platypusPlan(),
+  'giant-oceanic-manta-ray': () => mantaRayPlan(),
+  'lions-mane-jellyfish': () => cnidarianMedusaPlan(),
+  'dodo': () => dodoPlan(),
+  'thylacine': () => thylacinePlan(),
+  'stellers-sea-cow': () => stellersSeaCowPlan(),
+  'paradoxides-davidis': () => trilobitePlan(),
+  'cameroceras-trentonense': () => camerocerasPlan(),
+  'eurypterus-remipes': () => eurypterusPlan(),
+  'tiktaalik-roseae': () => tiktaalikPlan(),
+  'helicoprion-bessonovi': () => helicoprionPlan(),
+  'titanoboa-cerrejonensis': () => titanoboaPlan(),
+  'megatherium-americanum': () => megatheriumPlan(),
 };
 
 const ARCHETYPE_PLANS: Record<BodyArchetype, () => BodyPlan> = {
@@ -964,6 +1343,10 @@ const ARCHETYPE_PLANS: Record<BodyArchetype, () => BodyPlan> = {
   cephalopod: () => octopusPlan(),
   arthropod: () => mantisShrimpPlan(),
   ursid: () => bearPlan(),
+  manta_ray: () => mantaRayPlan(),
+  serpentine_reptile: () => titanoboaPlan(),
+  trilobite_arthropod: () => trilobitePlan(),
+  cnidarian_medusa: () => cnidarianMedusaPlan(),
 };
 
 export function getBodyPlan(animal: Pick<AnimalRecord, 'id' | 'archetype' | 'visualPalette'>): BodyPlan {
