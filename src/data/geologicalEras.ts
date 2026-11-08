@@ -1,0 +1,148 @@
+import { GeologicalEraInfo } from '../types/atlas';
+
+export const GEOLOGICAL_ERAS: GeologicalEraInfo[] = [
+  {
+    id: 'all',
+    name: 'All Epochs (541 MYA – Today)',
+    periodSpan: '541 Million Years Ago to Present',
+    myaNumeric: 0,
+    globalTempAvgC: '12°C – 28°C',
+    oxygenPercent: '15% – 35%',
+    continentalLayout: 'All Supercontinents & Modern Continents',
+    kidDescription:
+      'View both living animals across modern ecosystems and extinct creatures across 541 million years of Earth history simultaneously!',
+    accentHex: '#10b981',
+  },
+  {
+    id: 'cambrian',
+    name: 'Cambrian Explosion',
+    periodSpan: '541 – 485 MYA',
+    myaNumeric: 510,
+    globalTempAvgC: '22°C (Warm Shallow Seas)',
+    oxygenPercent: '12.5%',
+    continentalLayout: 'Gondwana & Laurentia (No land plants or land animals yet)',
+    kidDescription:
+      'Life explodes in the oceans! The very first compound eyes, shells, claws, and swimming apex predators appear in warm seas.',
+    accentHex: '#06b6d4',
+  },
+  {
+    id: 'devonian',
+    name: 'Devonian (Age of Fishes)',
+    periodSpan: '419 – 359 MYA',
+    myaNumeric: 380,
+    globalTempAvgC: '20°C',
+    oxygenPercent: '15%',
+    continentalLayout: 'Euramerica & Gondwana',
+    kidDescription:
+      'Giant armored fish rule the seas with guillotine-like bone jaws while brave lobe-finned tetrapod pioneers take the first steps onto muddy land!',
+    accentHex: '#0ea5e9',
+  },
+  {
+    id: 'carboniferous',
+    name: 'Carboniferous Coal Swamps',
+    periodSpan: '359 – 299 MYA',
+    myaNumeric: 315,
+    globalTempAvgC: '16°C',
+    oxygenPercent: '32% – 35% (Hyper-Oxygen Peak!)',
+    continentalLayout: 'Colliding into Pangaea',
+    kidDescription:
+      'Towering fern forests pump Earth’s oxygen to 35%! Because insects breathe through tiny body tubes, dragonflies grow as big as eagles.',
+    accentHex: '#22c55e',
+  },
+  {
+    id: 'permian',
+    name: 'Permian Supercontinent',
+    periodSpan: '299 – 252 MYA',
+    myaNumeric: 275,
+    globalTempAvgC: '18°C (Vast Arid Interior)',
+    oxygenPercent: '23%',
+    continentalLayout: 'Pangaea Supercontinent',
+    kidDescription:
+      'All land on Earth is fused into Pangaea! Bear-sized saber-toothed gorgonopsids like Inostrancevia (ancient cousins of mammals) dominate before the Great Dying extinction.',
+    accentHex: '#f97316',
+  },
+  {
+    id: 'triassic',
+    name: 'Triassic Recovery & Giant Marine Reptiles',
+    periodSpan: '252 – 201 MYA',
+    myaNumeric: 225,
+    globalTempAvgC: '24°C (Hot & Dry Monsoons)',
+    oxygenPercent: '16%',
+    continentalLayout: 'Pangaea Beginning to Rift',
+    kidDescription:
+      'From the ashes of the Permian, 15-meter Shonisaurus ichthyosaurs rule the Panthalassic Ocean while early archosaurs and the first tiny nocturnal mammals emerge on land.',
+    accentHex: '#f59e0b',
+  },
+  {
+    id: 'jurassic',
+    name: 'Jurassic Seas & Subtropical Coasts',
+    periodSpan: '201 – 145 MYA',
+    myaNumeric: 155,
+    globalTempAvgC: '21°C (Lush Subtropical)',
+    oxygenPercent: '26%',
+    continentalLayout: 'Laurasia (North) & Gondwana (South)',
+    kidDescription:
+      'Pangaea splits apart, creating warm epicontinental seas where 16.5-meter Leedsichthys—the largest bony fish in Earth history—cruises through plankton blooms.',
+    accentHex: '#84cc16',
+  },
+  {
+    id: 'cretaceous',
+    name: 'Cretaceous Seaways & River Giants',
+    periodSpan: '145 – 66 MYA',
+    myaNumeric: 72,
+    globalTempAvgC: '25°C (High Sea Levels)',
+    oxygenPercent: '30%',
+    continentalLayout: 'Fragmenting Continents & Western Interior Seaway',
+    kidDescription:
+      'High sea levels flood the continents! Car-sized Archelon sea turtles swim the Western Interior Seaway while 11.5-meter SuperCroc Sarcosuchus patrols tropical rivers.',
+    accentHex: '#ef4444',
+  },
+  {
+    id: 'paleogene',
+    name: 'Paleogene Mammal Rise',
+    periodSpan: '66 – 23 MYA',
+    myaNumeric: 40,
+    globalTempAvgC: '23°C',
+    oxygenPercent: '22%',
+    continentalLayout: 'Continents Approaching Modern Positions',
+    kidDescription:
+      'After the non-avian dinosaurs vanish, mammals rapidly diversify—including early whales with tiny hind legs that return to the oceans!',
+    accentHex: '#a855f7',
+  },
+  {
+    id: 'neogene',
+    name: 'Neogene Megapredators',
+    periodSpan: '23 – 2.58 MYA',
+    myaNumeric: 10,
+    globalTempAvgC: '16°C (Cooling & Grasslands Spread)',
+    oxygenPercent: '21%',
+    continentalLayout: 'Isthmus of Panama Forms',
+    kidDescription:
+      'Kelp forests and open savannas expand across Earth, while the 18-meter Megalodon shark patrols warm global oceans.',
+    accentHex: '#6366f1',
+  },
+  {
+    id: 'pleistocene',
+    name: 'Pleistocene Ice Age',
+    periodSpan: '2.58 MYA – 11,700 Years Ago',
+    myaNumeric: 0.1,
+    globalTempAvgC: '9°C (Glacial Cycles)',
+    oxygenPercent: '21%',
+    continentalLayout: 'Modern Continents + Beringia Land Bridge',
+    kidDescription:
+      'Massive glaciers advance and retreat! Woolly Mammoths, Saber-Toothed Cats, and elephant-sized Ground Sloths roam alongside early humans.',
+    accentHex: '#38bdf8',
+  },
+  {
+    id: 'holocene',
+    name: 'Modern Earth (Living Today)',
+    periodSpan: '11,700 Years Ago – Today',
+    myaNumeric: 0,
+    globalTempAvgC: '15°C',
+    oxygenPercent: '21%',
+    continentalLayout: '7 Continents & 5 Oceans',
+    kidDescription:
+      'Our living planet today! Over 2.1 million described animal species—plus iconic recently extinct species like the Dodo and Tasmanian Tiger.',
+    accentHex: '#10b981',
+  },
+];

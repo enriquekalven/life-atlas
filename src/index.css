@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+/*
+  Base fallback so the portal is never a stark white page, even for the split
+  second before utility classes apply or if a Tailwind class is ever missed.
+*/
+html {
+  color-scheme: dark;
+  background-color: #020617; /* slate-950 */
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #020617;
+  color: #f1f5f9; /* slate-100 */
+}
+
+#root {
+  min-height: 100vh;
+}
