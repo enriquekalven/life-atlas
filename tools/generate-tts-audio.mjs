@@ -3,11 +3,21 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { SPECIES_LOCALIZED_NARRATIONS } from '../src/data/localizedNarrations.ts';
+import { transformSync } from 'esbuild';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = path.resolve(__dirname, '..');
 const AUDIO_DIR = path.join(ROOT_DIR, 'public', 'audio');
+
+// Transpile src/data/localizedNarrations.ts in-memory via esbuild (bundled with Vite)
+// so this script runs cleanly on Node 20+ without requiring global npx/tsx.
+const tsSource = fs.readFileSync(
+  path.join(ROOT_DIR, 'src', 'data', 'localizedNarrations.ts'),
+  'utf8'
+);
+const jsCompiled = transformSync(tsSource, { loader: 'ts', format: 'esm' }).code;
+const modUrl = `data:text/javascript;base64,${Buffer.from(jsCompiled).toString('base64')}`;
+const { SPECIES_LOCALIZED_NARRATIONS } = await import(modUrl);
 
 const VOICE_CONFIG = {
   en: { languageCode: 'en-US', name: 'en-US-Chirp3-HD-Aoede' },
@@ -23,7 +33,29 @@ const VOICE_CONFIG = {
   ar: { languageCode: 'ar-XA', name: 'ar-XA-Chirp3-HD-Aoede' },
 };
 
-const token = execSync('gcloud auth print-access-token', { encoding: 'utf8' }).trim();
+function resolveGcloudBinary() {
+  const candidates = [
+    process.env.GCLOUD_BIN,
+    'gcloud',
+    '/google/data/ro/teams/cloud-sdk/gcloud',
+    '/google/bin/releases/cloud-sdk-build/gcloud.par',
+  ].filter(Boolean);
+  for (const bin of candidates) {
+    try {
+      execSync(`${bin} --version`, { stdio: 'ignore' });
+      return bin;
+    } catch {
+      // try next candidate
+    }
+  }
+  throw new Error('Could not locate gcloud binary. Set GCLOUD_BIN=/path/to/gcloud.');
+}
+
+const gcloudBin = resolveGcloudBinary();
+const token = (
+  process.env.GCP_ACCESS_TOKEN ||
+  execSync(`${gcloudBin} auth print-access-token`, { encoding: 'utf8' })
+).trim();
 const quotaProject = process.env.GCP_QUOTA_PROJECT || 'project-maui';
 
 function normalizeForChirp3(text, lang, aggressive = false) {
